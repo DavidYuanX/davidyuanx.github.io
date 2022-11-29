@@ -1,0 +1,146 @@
+<!DOCTYPE html><html lang="en"><head><meta name="generator" content="Hexo 3.9.0"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="A front end siege division built ~"><title>前端知识梳理之安全篇 | David's blog</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="/js/jquery.min.js"></script><link rel="icon" mask sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = 'https://hm.baidu.com/hm.js?' + 'b5b30c3f05f1d88ff91cf0f233b1fa32';
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+
+<!-- GrowingIO Analytics code version 2.1 -->
+<!-- Copyright 2015-2018 GrowingIO, Inc. More info available at http://www.growingio.com -->
+!function(e,t,n,g,i){e[i]=e[i]||function(){(e[i].q=e[i].q||[]).push(arguments)},n=t.createElement("script"),tag=t.getElementsByTagName("script")[0],n.async=1,n.src=('https:'==document.location.protocol?'https://':'http://')+g,tag.parentNode.insertBefore(n,tag)}(window,document,"script","assets.giocdn.com/2.1/gio.js","gio");
+  gio('init','9a2bc3f2970e279e', {});
+
+//custom page code begin here
+
+//custom page code end here
+
+gio('send');</script></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">前端知识梳理之安全篇</h1><a id="logo" href="/.">David's blog</a><p class="description">Welcome to my den</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> Home</i></a><a href="/archives/"><i class="fa fa-archive"> Archive</i></a><a href="/about/"><i class="fa fa-user"> About</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">前端知识梳理之安全篇</h1><div class="post-meta">May 20, 2020<span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span></div><a class="disqus-comment-count" href="/2020/05/20/前端知识梳理之安全篇/#vcomment"> </a><div class="post-content"><h3 id="什么是-XSS-攻击？"><a href="#什么是-XSS-攻击？" class="headerlink" title="什么是 XSS 攻击？"></a>什么是 XSS 攻击？</h3><p>XSS 全称是 Cross Site Scripting(即跨站脚本)，为了和 CSS 区分，故叫它XSS。XSS 攻击是指浏览器中执行恶意脚本(无论是跨域还是同域)，从而拿到用户的信息并进行操作。</p>
+<p>这些操作一般可以完成下面这些事情:</p>
+<ul>
+<li>窃取Cookie。</li>
+<li>监听用户行为，比如输入账号密码后直接发送到黑客服务器。</li>
+<li>修改 DOM 伪造登录表单。</li>
+<li>在页面中生成浮窗广告。</li>
+<li>通常情况，XSS 攻击的实现有三种方式——存储型、反射型和文档型。原理都比较简单，先来一一介绍一下。</li>
+</ul>
+<h4 id="存储型"><a href="#存储型" class="headerlink" title="存储型"></a>存储型</h4><p>存储型，顾名思义就是将恶意脚本存储了起来，确实，存储型的 XSS 将脚本存储到了服务端的数据库，然后在客户端执行这些脚本，从而达到攻击的效果。</p>
+<p>常见的场景是留言评论区提交一段脚本代码，如果前后端没有做好转义的工作，那评论内容存到了数据库，在页面渲染过程中直接执行, 相当于执行一段未知逻辑的 JS 代码，是非常恐怖的。这就是存储型的 XSS 攻击。</p>
+<h4 id="反射型"><a href="#反射型" class="headerlink" title="反射型"></a>反射型</h4><p>反射型XSS指的是恶意脚本作为网络请求的一部分。</p>
+<p>最经典就是在请求地址带参数, 这样，在服务器端会拿到参数,然后将内容返回给浏览器端，浏览器将这些内容作为HTML的一部分解析，发现是一个脚本，直接执行，这样就被攻击了。</p>
+<p>之所以叫它反射型, 是因为恶意脚本是通过作为网络请求的参数，经过服务器，然后再反射到HTML文档中，执行解析。和存储型不一样的是，服务器并不会存储这些恶意脚本。</p>
+<h4 id="文档型"><a href="#文档型" class="headerlink" title="文档型"></a>文档型</h4><p>文档型的 XSS 攻击并不会经过服务端，而是作为中间人的角色，在数据传输过程劫持到网络数据包，然后修改里面的 html 文档！</p>
+<p>这样的劫持方式包括WIFI路由器劫持或者本地恶意软件等。</p>
+<h3 id="防范措施"><a href="#防范措施" class="headerlink" title="防范措施"></a>防范措施</h3><p>明白了三种XSS攻击的原理，我们能发现一个共同点: 都是让恶意脚本直接能在浏览器中执行。</p>
+<p>那么要防范它，就是要避免这些脚本代码的执行。</p>
+<p>为了完成这一点，必须做到一个信念，两个利用。</p>
+<h4 id="一个信念"><a href="#一个信念" class="headerlink" title="一个信念"></a>一个信念</h4><p>千万不要相信任何用户的输入！</p>
+<p>无论是在前端和服务端，都要对用户的输入进行转码或者过滤。</p>
+<h4 id="利用-CSP"><a href="#利用-CSP" class="headerlink" title="利用 CSP"></a>利用 CSP</h4><p>CSP，即浏览器中的内容安全策略，它的核心思想就是服务器决定浏览器加载哪些资源，具体来说可以完成以下功能:</p>
+<ul>
+<li>限制其他域下的资源加载。</li>
+<li>禁止向其它域提交数据。</li>
+<li>提供上报机制，能帮助我们及时发现 XSS 攻击。</li>
+</ul>
+<h4 id="利用-HttpOnly-和-Secure-限制访问-Cookie"><a href="#利用-HttpOnly-和-Secure-限制访问-Cookie" class="headerlink" title="利用 HttpOnly 和 Secure 限制访问 Cookie"></a>利用 HttpOnly 和 Secure 限制访问 Cookie</h4><ul>
+<li><p>有两种方法可以确保 Cookie 被安全发送，并且不会被意外的参与者或脚本访问：Secure 属性和HttpOnly 属性。</p>
+</li>
+<li><p>标记为 Secure 的 Cookie 只应通过被 HTTPS 协议加密过的请求发送给服务端，但即便设置了 Secure 标记，敏感信息也不应该通过 Cookie 传输，因为 Cookie 有其固有的不安全性，Secure 标记也无法提供确实的安全保障, 例如，可以访问客户端硬盘的人可以读取它。</p>
+</li>
+<li><p>JavaScript Document.cookie API 无法访问带有 HttpOnly 属性的cookie；此类 Cookie 仅作用于服务器。例如，例如，持久化服务器端会话的 Cookie 不需要对 JavaScript 可用，而应具有 HttpOnly 属性。此预防措施有助于缓解跨站点脚本（XSS）攻击。</p>
+</li>
+</ul>
+<h3 id="CSRF攻击-是什么"><a href="#CSRF攻击-是什么" class="headerlink" title="CSRF攻击 是什么?"></a>CSRF攻击 是什么?</h3><p>定义: </p>
+<blockquote>
+<p>CSRF(Cross-site request forgery), 即跨站请求伪造，指的是黑客诱导用户点击链接，打开黑客的网站，然后黑客利用用户目前的登录状态发起跨站请求。</p>
+</blockquote>
+<p>举个例子, 你在某个论坛点击了黑客精心挑选的小姐姐图片，你点击后，进入了一个新的页面。</p>
+<p>那么恭喜你，被攻击了:）</p>
+<p>你可能会比较好奇，怎么突然就被攻击了呢？接下来我们就来拆解一下当你点击了链接之后，黑客在背后做了哪些事情。</p>
+<p>可能会做三样事情。列举如下: </p>
+<h4 id="自动发-GET-请求"><a href="#自动发-GET-请求" class="headerlink" title="自动发 GET 请求"></a>自动发 GET 请求</h4><p>黑客网页里面可能有一段这样的代码:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"https://xxx.com/info?user=hhh&amp;count=100"</span>&gt;</span><span class="tag">&lt;/<span class="name">img</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>进入页面后自动发送 get 请求，值得注意的是，这个请求会自动带上关于 xxx.com 的 cookie 信息(这里是假定你已经在 xxx.com 中登录过)。</p>
+<p>假如服务器端没有相应的验证机制，它可能认为发请求的是一个正常的用户，因为携带了相应的 cookie，然后进行相应的各种操作，可以是转账汇款以及其他的恶意操作。</p>
+<h4 id="自动发-POST-请求"><a href="#自动发-POST-请求" class="headerlink" title="自动发 POST 请求"></a>自动发 POST 请求</h4><p>黑客可能自己填了一个表单，写了一段自动提交的脚本。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">id</span>=<span class="string">'hacker-form'</span> <span class="attr">action</span>=<span class="string">"https://xxx.com/info"</span> <span class="attr">method</span>=<span class="string">"POST"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"hidden"</span> <span class="attr">name</span>=<span class="string">"user"</span> <span class="attr">value</span>=<span class="string">"hhh"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"hidden"</span> <span class="attr">name</span>=<span class="string">"count"</span> <span class="attr">value</span>=<span class="string">"100"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"><span class="built_in">document</span>.getElementById(<span class="string">'hacker-form'</span>).submit();</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>同样也会携带相应的用户 cookie 信息，让服务器误以为是一个正常的用户在操作，让各种恶意的操作变为可能。</p>
+<h4 id="诱导点击发送-GET-请求"><a href="#诱导点击发送-GET-请求" class="headerlink" title="诱导点击发送 GET 请求"></a>诱导点击发送 GET 请求</h4><p>在黑客的网站上，可能会放上一个链接，驱使你来点击:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://xxx/info?user=hhh&amp;count=100"</span> <span class="attr">taget</span>=<span class="string">"_blank"</span>&gt;</span>点击进入修仙世界<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>点击后，自动发送 get 请求，接下来和自动发 GET 请求部分同理。</p>
+<p>这就是CSRF攻击的原理。和XSS攻击对比，CSRF 攻击并不需要将恶意代码注入用户当前页面的html文档中，而是跳转到新的页面，利用服务器的验证漏洞和用户之前的登录状态来模拟用户进行操作。</p>
+<h4 id="防范措施-1"><a href="#防范措施-1" class="headerlink" title="防范措施"></a>防范措施</h4><h5 id="利用Cookie的SameSite属性"><a href="#利用Cookie的SameSite属性" class="headerlink" title="利用Cookie的SameSite属性"></a>利用Cookie的SameSite属性</h5><p>CSRF攻击中重要的一环就是自动发送目标站点下的 Cookie,然后就是这一份 Cookie 模拟了用户的身份。因此在Cookie上面下文章是防范的不二之选。</p>
+<p>恰好，在 Cookie 当中有一个关键的字段，可以对请求中 Cookie 的携带作一些限制，这个字段就是SameSite。</p>
+<p>SameSite可以设置为三个值，Strict、Lax和None。</p>
+<ul>
+<li><p>在Strict模式下，浏览器完全禁止第三方请求携带Cookie。比如请求baidu.com网站只能在baidu.com域名当中请求才能携带 Cookie，在其他网站请求都不能。</p>
+</li>
+<li><p>在Lax模式，就宽松一点了，但是只能在 get 方法提交表单况或者a 标签发送 get 请求的情况下可以携带 Cookie，其他情况均不能。</p>
+</li>
+<li><p>在None模式下，也就是默认模式，请求会自动携带上 Cookie。</p>
+</li>
+</ul>
+<h5 id="验证来源站点"><a href="#验证来源站点" class="headerlink" title="验证来源站点"></a>验证来源站点</h5><p>这就需要要用到请求头中的两个字段: Origin和Referer。</p>
+<p>其中，Origin只包含域名信息，而Referer包含了具体的 URL 路径。</p>
+<p>当然，这两者都是可以伪造的，通过 Ajax 中自定义请求头即可，安全性略差。</p>
+<h5 id="CSRF-Token"><a href="#CSRF-Token" class="headerlink" title="CSRF Token"></a>CSRF Token</h5><p>Django作为 Python 的一门后端框架，用它开发过的同学就知道，在它的模板(template)中, 开发表单时，经常会附上这样一行代码:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% csrf_token %&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这就是CSRF Token的典型应用。那它的原理是怎样的呢？</p>
+<p>首先，浏览器向服务器发送请求时，服务器生成一个字符串，将其植入到返回的页面中。</p>
+<p>然后浏览器如果要发送请求，就必须带上这个字符串，然后服务器来验证是否合法，如果不合法则不予响应。这个字符串也就是CSRF Token，通常第三方站点无法拿到这个 token, 因此也就是被服务器给拒绝</p>
+<h3 id="HTTPS为什么让数据传输更安全？"><a href="#HTTPS为什么让数据传输更安全？" class="headerlink" title="HTTPS为什么让数据传输更安全？"></a>HTTPS为什么让数据传输更安全？</h3><p>谈到HTTPS, 就不得不谈到与之相对的HTTP。HTTP的特性是明文传输，因此在传输的每一个环节，数据都有可能被第三方窃取或者篡改，具体来说，HTTP 数据经过 TCP 层，然后经过WIFI路由器、运营商和目标服务器，这些环节中都可能被中间人拿到数据并进行篡改，也就是我们常说的中间人攻击。</p>
+<p>为了防范这样一类攻击，我们不得已要引入新的加密方案，即 HTTPS。</p>
+<p>HTTPS并不是一个新的协议, 而是一个加强版的HTTP。其原理是在HTTP和TCP之间建立了一个中间层，当HTTP和TCP通信时并不是像以前那样直接通信，直接经过了一个中间层进行加密，将加密后的数据包传给TCP, 响应的，TCP必须将数据包解密，才能传给上面的HTTP。这个中间层也叫安全层。安全层的核心就是对数据加解密。</p>
+<p>接下来我们就来剖析一下HTTPS的加解密是如何实现的。</p>
+<h4 id="对称加密和非对称加密"><a href="#对称加密和非对称加密" class="headerlink" title="对称加密和非对称加密"></a>对称加密和非对称加密</h4><h5 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h5><p>首先需要理解对称加密和非对称加密的概念，然后讨论两者应用后的效果如何。</p>
+<p>对称加密是最简单的方式，指的是加密和解密用的是同样的密钥。</p>
+<p>而对于非对称加密，如果有 A、 B 两把密钥，如果用 A 加密过的数据包只能用 B 解密，反之，如果用 B 加密过的数据包只能用 A 解密。</p>
+<h5 id="加解密过程"><a href="#加解密过程" class="headerlink" title="加解密过程"></a>加解密过程</h5><p>接着我们来谈谈浏览器和服务器进行协商加解密的过程。</p>
+<p>首先，浏览器会给服务器发送一个随机数client_random 和一个加密的方法列表。</p>
+<p>服务器接收后给浏览器返回另一个随机数server_random和加密方法。</p>
+<p>现在，两者拥有三样相同的凭证: client_random、server_random和加密方法。</p>
+<p>接着用这个加密方法将两个随机数混合起来生成密钥，这个密钥就是浏览器和服务端通信的暗号。</p>
+<h5 id="加解密过程-1"><a href="#加解密过程-1" class="headerlink" title="加解密过程"></a>加解密过程</h5><p>接着我们来谈谈浏览器和服务器进行协商加解密的过程。</p>
+<p>首先，浏览器会给服务器发送一个随机数client_random 和一个加密的方法列表。</p>
+<p>服务器接收后给浏览器返回另一个随机数server_random和加密方法。</p>
+<p>现在，两者拥有三样相同的凭证: client_random、server_random和加密方法。</p>
+<p>接着用这个加密方法将两个随机数混合起来生成密钥，这个密钥就是浏览器和服务端通信的暗号。</p>
+<h5 id="各自应用的效果"><a href="#各自应用的效果" class="headerlink" title="各自应用的效果"></a>各自应用的效果</h5><p>如果用对称加密的方式，那么第三方可以在中间获取到client_random、server_random和加密方法，由于这个加密方法同时可以解密，所以中间人可以成功对暗号进行解密，拿到数据，很容易就将这种加密方式破解了。</p>
+<p>那能不能只用非对称加密呢？理论上是可以的，但实际上非对称加密需要的计算量非常大，对于稍微大一点的数据即使用最快的处理器也非常耗时。后面有机会给大家分享一下 RSA 非对称加密算法的原理，大家就会有更加直观的认识，这里我们先不深究</p>
+<h5 id="对称加密和非对称加密的结合"><a href="#对称加密和非对称加密的结合" class="headerlink" title="对称加密和非对称加密的结合"></a>对称加密和非对称加密的结合</h5><p>可以发现，对称加密和非对称加密，只用前者会有安全隐患，只用后者性能消耗又太大。那我们能不能把两者结合，保证性能的同时又能保证安全呢？</p>
+<p>其实是可以的，演示一下整个流程：</p>
+<ul>
+<li>浏览器向服务器发送client_random和加密方法列表。</li>
+<li>服务器接收到，返回server_random、加密方法以及公钥。</li>
+<li>浏览器接收，接着生成另一个随机数pre_random, 并且用公钥加密，传给服务器。(敲黑板！重点操作！)</li>
+<li>服务器用公钥解密这个被加密后的pre_random。</li>
+<li>现在浏览器和服务器有三样相同的凭证:client_random、server_random和pre_random。然后两者用相同的加密方法混合这三个随机数，生成最终的密钥。</li>
+</ul>
+<p>然后浏览器和服务器尽管用一样的密钥进行通信，即使用对称加密。</p>
+<p>这个最终的密钥是很难被中间人拿到的，为什么呢? 因为中间人没有私钥，从而拿不到pre_random，也就无法生成最终的密钥了。</p>
+<p>回头比较一下和单纯的使用非对称加密, 这种方式做了什么改进呢？本质上是防止了私钥加密的数据外传。单独使用非对称加密，最大的漏洞在于服务器传数据给浏览器只能用私钥加密，这是危险产生的根源。利用对称和非对称加密结合的方式，就防止了这一点，从而保证了安全。</p>
+<h4 id="添加数字证书"><a href="#添加数字证书" class="headerlink" title="添加数字证书"></a>添加数字证书</h4><p>尽管通过两者加密方式的结合，能够很好地实现加密传输，但实际上还是存在一些问题。黑客如果采用 DNS 劫持，将目标地址替换成黑客服务器的地址，然后黑客自己造一份公钥和私钥，照样能进行数据传输。而对于浏览器用户而言，他是不知道自己正在访问一个危险的服务器的。</p>
+<p>事实上HTTPS在上述结合对称和非对称加密的基础上，又添加了数字证书认证的步骤。其目的就是让服务器证明自己的身份。</p>
+<h4 id="传输过程"><a href="#传输过程" class="headerlink" title="传输过程"></a>传输过程</h4><p>为了获取这个证书，服务器运营者需要向第三方认证机构获取授权，这个第三方机构也叫CA(Certificate Authority), 认证通过后 CA 会给服务器颁发数字证书。</p>
+<p>这个数字证书有两个作用:</p>
+<ul>
+<li>服务器向浏览器证明自己的身份。</li>
+<li>把公钥传给浏览器。<br>这个验证的过程发生在什么时候呢？</li>
+</ul>
+<p>当服务器传送server_random、加密方法的时候，顺便会带上数字证书(包含了公钥), 接着浏览器接收之后就会开始验证数字证书。如果验证通过，那么后面的过程照常进行，否则拒绝执行。</p>
+<p>现在我们来梳理一下HTTPS最终的加解密过程:<br><img src="/img/https.jpg" class="[class names]" title="[width] [height] [title text [alt text]]"></p>
+<h4 id="认证过程"><a href="#认证过程" class="headerlink" title="认证过程"></a>认证过程</h4><p>浏览器拿到数字证书后，如何来对证书进行认证呢？</p>
+<p>首先，会读取证书中的明文内容。CA 进行数字证书的签名时会保存一个 Hash 函数，来这个函数来计算明文内容得到信息A，然后用公钥解密明文内容得到信息B，两份信息做比对，一致则表示认证合法。</p>
+<p>当然有时候对于浏览器而言，它不知道哪些 CA 是值得信任的，因此会继续查找 CA 的上级 CA，以同样的信息比对方式验证上级 CA 的合法性。一般根级的 CA 会内置在操作系统当中，当然如果向上找没有找到根级的 CA，那么将被视为不合法。</p>
+</div><iframe src="/donate/?AliPayQR=/img/alipay.jpeg&amp;WeChatQR=null&amp;GitHub=https://github.com/DavidYuanX&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=null" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div class="tags"><a href="/tags/前端知识梳理/">前端知识梳理</a></div><div class="post-nav"><a class="pre" href="/2020/05/25/前端知识梳理之HTTP协议/">前端知识梳理之HTTP协议</a><a class="next" href="/2020/05/15/前端知识梳理之渲染篇/">前端知识梳理之渲染篇</a></div><div id="vcomment"></div><link rel="stylesheet" type="text/css" href="//unpkg.com/@waline/client@v2/dist/waline.css"><script src="//unpkg.com/@waline/client@v2/dist/waline.js"></script><script>const waline = Waline.init({
+  el: '#vcomment',
+  path: decodeURI(location.pathname) || '/',
+  lang: 'zh-cn',
+  serverURL: 'https://vercel-xi-gilt.vercel.app',
+  pageSize:'10'
+});</script></div></div></div><aside class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="search-form"><input class="popup-trigger" placeholder="Search" readonly="readonly"></div></div><div class="toc-article" id="toc"><div class="toc-title">Categories<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是-XSS-攻击？"><span class="toc-number">1.</span> <span class="toc-text">什么是 XSS 攻击？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#存储型"><span class="toc-number">1.1.</span> <span class="toc-text">存储型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#反射型"><span class="toc-number">1.2.</span> <span class="toc-text">反射型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#文档型"><span class="toc-number">1.3.</span> <span class="toc-text">文档型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#防范措施"><span class="toc-number">2.</span> <span class="toc-text">防范措施</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一个信念"><span class="toc-number">2.1.</span> <span class="toc-text">一个信念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#利用-CSP"><span class="toc-number">2.2.</span> <span class="toc-text">利用 CSP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#利用-HttpOnly-和-Secure-限制访问-Cookie"><span class="toc-number">2.3.</span> <span class="toc-text">利用 HttpOnly 和 Secure 限制访问 Cookie</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSRF攻击-是什么"><span class="toc-number">3.</span> <span class="toc-text">CSRF攻击 是什么?</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#自动发-GET-请求"><span class="toc-number">3.1.</span> <span class="toc-text">自动发 GET 请求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#自动发-POST-请求"><span class="toc-number">3.2.</span> <span class="toc-text">自动发 POST 请求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#诱导点击发送-GET-请求"><span class="toc-number">3.3.</span> <span class="toc-text">诱导点击发送 GET 请求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#防范措施-1"><span class="toc-number">3.4.</span> <span class="toc-text">防范措施</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#利用Cookie的SameSite属性"><span class="toc-number">3.4.1.</span> <span class="toc-text">利用Cookie的SameSite属性</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#验证来源站点"><span class="toc-number">3.4.2.</span> <span class="toc-text">验证来源站点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#CSRF-Token"><span class="toc-number">3.4.3.</span> <span class="toc-text">CSRF Token</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTPS为什么让数据传输更安全？"><span class="toc-number">4.</span> <span class="toc-text">HTTPS为什么让数据传输更安全？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#对称加密和非对称加密"><span class="toc-number">4.1.</span> <span class="toc-text">对称加密和非对称加密</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#概念"><span class="toc-number">4.1.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#加解密过程"><span class="toc-number">4.1.2.</span> <span class="toc-text">加解密过程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#加解密过程-1"><span class="toc-number">4.1.3.</span> <span class="toc-text">加解密过程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#各自应用的效果"><span class="toc-number">4.1.4.</span> <span class="toc-text">各自应用的效果</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#对称加密和非对称加密的结合"><span class="toc-number">4.1.5.</span> <span class="toc-text">对称加密和非对称加密的结合</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#添加数字证书"><span class="toc-number">4.2.</span> <span class="toc-text">添加数字证书</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#传输过程"><span class="toc-number">4.3.</span> <span class="toc-text">传输过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#认证过程"><span class="toc-number">4.4.</span> <span class="toc-text">认证过程</span></a></li></ol></li></ol></div></div></div></aside><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2022 <a href="/." rel="nofollow">David's blog.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv"><i class="fa fa-eye" aria-hidden="true"></i> <span id="busuanzi_value_site_pv"></span> times</span></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="/js/search.js?v=0.0.0"></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+   search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script type="text/javascript" src="/js/underscore-min.js"></script><script type="text/javascript" src="/js/inView.js"></script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>

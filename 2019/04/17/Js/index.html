@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="en"><head><meta name="generator" content="Hexo 3.9.0"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="A front end siege division built ~"><title>JavaScript基础 | David's blog</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="/js/jquery.min.js"></script><link rel="icon" mask sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = 'https://hm.baidu.com/hm.js?' + 'b5b30c3f05f1d88ff91cf0f233b1fa32';
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+
+<!-- GrowingIO Analytics code version 2.1 -->
+<!-- Copyright 2015-2018 GrowingIO, Inc. More info available at http://www.growingio.com -->
+!function(e,t,n,g,i){e[i]=e[i]||function(){(e[i].q=e[i].q||[]).push(arguments)},n=t.createElement("script"),tag=t.getElementsByTagName("script")[0],n.async=1,n.src=('https:'==document.location.protocol?'https://':'http://')+g,tag.parentNode.insertBefore(n,tag)}(window,document,"script","assets.giocdn.com/2.1/gio.js","gio");
+  gio('init','9a2bc3f2970e279e', {});
+
+//custom page code begin here
+
+//custom page code end here
+
+gio('send');</script></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">JavaScript基础</h1><a id="logo" href="/.">David's blog</a><p class="description">Welcome to my den</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> Home</i></a><a href="/archives/"><i class="fa fa-archive"> Archive</i></a><a href="/about/"><i class="fa fa-user"> About</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">JavaScript基础</h1><div class="post-meta">Apr 17, 2019<span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span></div><a class="disqus-comment-count" href="/2019/04/17/Js/#vcomment"> </a><div class="post-content"><h3 id="JavaScript规定了几种语言类型"><a href="#JavaScript规定了几种语言类型" class="headerlink" title="JavaScript规定了几种语言类型"></a>JavaScript规定了几种语言类型</h3><p>Number,String,Boolean,Null,Undefined,Object,Symbol</p>
+<h3 id="JavaScript对象的底层数据结构是什么"><a href="#JavaScript对象的底层数据结构是什么" class="headerlink" title="JavaScript对象的底层数据结构是什么"></a>JavaScript对象的底层数据结构是什么</h3><p>四个数据属性<br>writable<br>对象属性是否可以被任意改写</p>
+<p>enumerabel<br>对象属性是否可枚举，可枚举就支持for in、Object.keys、JSON.stringify方法，反之亦然。</p>
+<p>value<br>对象属性的默认值</p>
+<p>configurable<br>能否使用delete、能否需改属性特性、或能否修改访问器属性、，false为不可重新定义，默认值为true</p>
+<p>两个访问器属性<br>get<br>获取对象属性值时候触发的方法</p>
+<p>set<br>给对象属性赋值时候触发的方法</p>
+<h3 id="Symbol类型在实际开发中的应用、可手动实现一个简单的Symbol"><a href="#Symbol类型在实际开发中的应用、可手动实现一个简单的Symbol" class="headerlink" title="Symbol类型在实际开发中的应用、可手动实现一个简单的Symbol"></a>Symbol类型在实际开发中的应用、可手动实现一个简单的Symbol</h3><p>ES6中引入了一种新的基础数据类型：Symbol，不过很多开发者可能都不怎么了解它，或者觉得在实际的开发工作中并没有什么场景应用到它，那么今天我们来讲讲这个数据类型，并看看我们怎么来利用它来改进一下我们的代码。由于Symbol是一种基础数据类型，所以当我们使用typeof去检查它的类型的时候，它会返回一个属于自己的类型symbol，而不是什么string、object之类的：<br>  应用场景1：使用Symbol来作为对象属性名(key)<br>    Symbol类型的key是不能通过Object.keys()或者for…in来枚举的，它未被包含在对象自身的属性名集合(property names)之中。所以，利用该特性，我们可以把一些不需要对外操作和访问的属性使用Symbol来定义。也正因为这样一个特性，当使用JSON.stringify()将对象转换成JSON字符串的时候，Symbol属性也会被排除在输出内容之外,</p>
+<p>  应用场景2：使用Symbol来替代常量<br>    const TYPE_AUDIO = Symbol()<br>    const TYPE_VIDEO = Symbol()<br>    const TYPE_IMAGE = Symbol()</p>
+<p>  应用场景3：使用Symbol定义类的私有属性/方法<br>    Symbol只能被限制在声明的js内部使用，所以使用它来定义的类属性是没有办法被模块外访问到的，达到了一个私有化的效果。</p>
+<h3 id="JavaScript中的变量在内存中的具体存储形式"><a href="#JavaScript中的变量在内存中的具体存储形式" class="headerlink" title="JavaScript中的变量在内存中的具体存储形式"></a>JavaScript中的变量在内存中的具体存储形式</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> m = &#123; <span class="attr">a</span>: <span class="number">10</span>, <span class="attr">b</span>: <span class="number">20</span> &#125;</span><br><span class="line"><span class="keyword">var</span> n = m;</span><br><span class="line"><span class="keyword">var</span> l = m;</span><br><span class="line">n     = <span class="number">15</span>;</span><br><span class="line">l.a   = <span class="number">15</span></span><br></pre></td></tr></table></figure>
+<p>  变量m存在于栈中，{ a: 10, b: 20 } 作为对象存在于堆内存中,n = m, l = m。 n = 15后切断了 与m地址值的联系故而不影响m，l.a = 15 会改变m.a 的值。</p>
+<h3 id="基本类型对应的内置对象，以及他们之间的装箱拆箱操作"><a href="#基本类型对应的内置对象，以及他们之间的装箱拆箱操作" class="headerlink" title="基本类型对应的内置对象，以及他们之间的装箱拆箱操作"></a>基本类型对应的内置对象，以及他们之间的装箱拆箱操作</h3><p>还是拿最开始的例子 var s1 = “abc”;var s2 = s1.indexOf(“a”)；<br>变量s1是一个基本类型值，它不是对象，它不应该有方法。但是js内部为我们完成了一系列处理（即装箱），使得它能够调用方法。<br>拆箱：将引用类型对象转换为对应的值类型对象,它是通过引用类型的valueOf()或者toString()方法来实现的。<br>console.log( typeof s1 ); //object console.log( typeof objStr.valueOf() ); //string console.log( typeof objNum.toString() ); // string</p>
+<h3 id="理解值类型和引用类型"><a href="#理解值类型和引用类型" class="headerlink" title="理解值类型和引用类型"></a>理解值类型和引用类型</h3><p>JS基本类型与引用类型知多少<br>1、JavaScript值类型和引用类型有哪些<br>  （1）值类型(基本类型)：数值(number)、布尔值(boolean)、null、undefined、string(在赋值传递中会以引用类型的方式来处理)。</p>
+<p>  （2）引用类型：对象、数组、函数。</p>
+<p>2、如何理解值类型和引用类型<br>  之前看到一个比喻，觉得非常贴切，想要和大家分享一下：用“连锁店”和“连锁店钥匙”来理解。<br>  （1）值类型：变量的交换等于在一个新的地方按照连锁店的规范标准（统一店面理解为相同的变量内容）新开一个分店，这样新开的店与其它旧店互不相关、各自运营。<br>  （2）引用类型：变量的交换等同于把现有一间店的钥匙（变量引用地址）复制一把给了另外一个老板，此时两个老板同时管理一间店，两个老板的行为都有可能对一间店的运营造成影响。</p>
+<h3 id="null和undefined的区别"><a href="#null和undefined的区别" class="headerlink" title="null和undefined的区别"></a>null和undefined的区别</h3><p>  最初设计<br>    JavaScript的最初版本是这样区分的：null是一个表示”无”的对象，转为数值时为0；undefined是一个表示”无”的原始值，转为数值时为NaN。<br>  目前的用法<br>    但是，上面这样的区分，在实践中很快就被证明不可行。目前，null和undefined基本是同义的，只有一些细微的差别。</p>
+<pre><code>null表示&quot;没有对象&quot;，即该处不应该有值。典型用法是：
+
+（1） 作为函数的参数，表示该函数的参数不是对象。
+
+（2） 作为对象原型链的终点。
+
+
+Object.getPrototypeOf(Object.prototype)
+// null
+
+undefined表示&quot;缺少值&quot;，就是此处应该有一个值，但是还没有定义。典型用法是：
+
+（1）变量被声明了，但没有赋值时，就等于undefined。
+
+（2) 调用函数时，应该提供的参数没有提供，该参数等于undefined。
+
+（3）对象没有赋值的属性，该属性的值为undefined。
+
+（4）函数没有返回值时，默认返回undefined。
+</code></pre><h3 id="至少可以说出三种判断JavaScript数据类型的方式，以及他们的优缺点，如何准确的判断数组类型"><a href="#至少可以说出三种判断JavaScript数据类型的方式，以及他们的优缺点，如何准确的判断数组类型" class="headerlink" title="至少可以说出三种判断JavaScript数据类型的方式，以及他们的优缺点，如何准确的判断数组类型"></a>至少可以说出三种判断JavaScript数据类型的方式，以及他们的优缺点，如何准确的判断数组类型</h3><p>  1、typeof:（可以对基本类型做出准确的判断，但对于引用类型，用它就有点力不从心了）<br>  2、instanceof 判断对象和构造函数在原型链上是否有关系，如果有关系，返回真，否则返回假<br>  3、constructor：查看对象对应的构造函数，constructor 在其对应对象的原型下面，是自动生成的。当我们写一个构造函数的时候，程序会自动添加：构造函数名.prototype.constructor = 构造函数名<br>  4、Object.prototype.toString(可以说不管是什么类型，它都可以立即判断出)</p>
+<h3 id="可能发生隐式类型转换的场景以及转换原则，应如何避免或巧妙应用"><a href="#可能发生隐式类型转换的场景以及转换原则，应如何避免或巧妙应用" class="headerlink" title="可能发生隐式类型转换的场景以及转换原则，应如何避免或巧妙应用"></a>可能发生隐式类型转换的场景以及转换原则，应如何避免或巧妙应用</h3><p>  1， “+”“-”运算符<br>  2，语句中存在的隐式类型转换，会在判断时转换为Boolean类型;<br>  3， alert时存在的隐式类型转换<br>  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span>.prototype.fn = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span> <span class="keyword">this</span>&#125;;</span><br><span class="line"><span class="keyword">var</span> a = <span class="string">'hello'</span>;</span><br><span class="line">alert(<span class="keyword">typeof</span> a.fn()); <span class="comment">//--&gt;object</span></span><br><span class="line">alert(a.fn()); <span class="comment">//--&gt;hello</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="出现小数精度丢失的原因，JavaScript可以存储的最大数字、最大安全数字，JavaScript处理大数字的方法、避免精度丢失的方法"><a href="#出现小数精度丢失的原因，JavaScript可以存储的最大数字、最大安全数字，JavaScript处理大数字的方法、避免精度丢失的方法" class="headerlink" title="出现小数精度丢失的原因，JavaScript可以存储的最大数字、最大安全数字，JavaScript处理大数字的方法、避免精度丢失的方法"></a>出现小数精度丢失的原因，JavaScript可以存储的最大数字、最大安全数字，JavaScript处理大数字的方法、避免精度丢失的方法</h3><p>  最大安全数字:即2的53次方，为9007199254740992。如果超过这个值，那么js会出现不精确的问题。解决精度丢失的问题,NPM上有许多支持JavaScript和Node.js的数学库，比如math.js，decimal.js,D.js等等</p>
+<h2 id="未完待续～"><a href="#未完待续～" class="headerlink" title="未完待续～"></a>未完待续～</h2></div><iframe src="/donate/?AliPayQR=/img/alipay.jpeg&amp;WeChatQR=null&amp;GitHub=https://github.com/DavidYuanX&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=null" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div class="tags"><a href="/tags/Js/">Js</a></div><div class="post-nav"><a class="pre" href="/2019/04/22/Js闭包/">Javascript闭包</a><a class="next" href="/2019/04/12/Node.js+MySQL/">Node.js + MySQL 实现曾删改查，上传图片， sms服务～</a></div><div id="vcomment"></div><link rel="stylesheet" type="text/css" href="//unpkg.com/@waline/client@v2/dist/waline.css"><script src="//unpkg.com/@waline/client@v2/dist/waline.js"></script><script>const waline = Waline.init({
+  el: '#vcomment',
+  path: decodeURI(location.pathname) || '/',
+  lang: 'zh-cn',
+  serverURL: 'https://vercel-xi-gilt.vercel.app',
+  pageSize:'10'
+});</script></div></div></div><aside class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="search-form"><input class="popup-trigger" placeholder="Search" readonly="readonly"></div></div><div class="toc-article" id="toc"><div class="toc-title">Categories<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript规定了几种语言类型"><span class="toc-number">1.</span> <span class="toc-text">JavaScript规定了几种语言类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript对象的底层数据结构是什么"><span class="toc-number">2.</span> <span class="toc-text">JavaScript对象的底层数据结构是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Symbol类型在实际开发中的应用、可手动实现一个简单的Symbol"><span class="toc-number">3.</span> <span class="toc-text">Symbol类型在实际开发中的应用、可手动实现一个简单的Symbol</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript中的变量在内存中的具体存储形式"><span class="toc-number">4.</span> <span class="toc-text">JavaScript中的变量在内存中的具体存储形式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基本类型对应的内置对象，以及他们之间的装箱拆箱操作"><span class="toc-number">5.</span> <span class="toc-text">基本类型对应的内置对象，以及他们之间的装箱拆箱操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#理解值类型和引用类型"><span class="toc-number">6.</span> <span class="toc-text">理解值类型和引用类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#null和undefined的区别"><span class="toc-number">7.</span> <span class="toc-text">null和undefined的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#至少可以说出三种判断JavaScript数据类型的方式，以及他们的优缺点，如何准确的判断数组类型"><span class="toc-number">8.</span> <span class="toc-text">至少可以说出三种判断JavaScript数据类型的方式，以及他们的优缺点，如何准确的判断数组类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#可能发生隐式类型转换的场景以及转换原则，应如何避免或巧妙应用"><span class="toc-number">9.</span> <span class="toc-text">可能发生隐式类型转换的场景以及转换原则，应如何避免或巧妙应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#出现小数精度丢失的原因，JavaScript可以存储的最大数字、最大安全数字，JavaScript处理大数字的方法、避免精度丢失的方法"><span class="toc-number">10.</span> <span class="toc-text">出现小数精度丢失的原因，JavaScript可以存储的最大数字、最大安全数字，JavaScript处理大数字的方法、避免精度丢失的方法</span></a></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#未完待续～"><span class="toc-number"></span> <span class="toc-text">未完待续～</span></a></li></div></div></div></aside><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2022 <a href="/." rel="nofollow">David's blog.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv"><i class="fa fa-eye" aria-hidden="true"></i> <span id="busuanzi_value_site_pv"></span> times</span></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="/js/search.js?v=0.0.0"></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+   search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script type="text/javascript" src="/js/underscore-min.js"></script><script type="text/javascript" src="/js/inView.js"></script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
