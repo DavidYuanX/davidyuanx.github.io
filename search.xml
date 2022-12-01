@@ -291,7 +291,7 @@
       <link href="/2019/10/28/React%20Native%E5%BC%80%E5%8F%91%E4%B9%8B%E7%9C%9F%E6%9C%BA%E8%B0%83%E8%AF%95/"/>
       <url>/2019/10/28/React%20Native%E5%BC%80%E5%8F%91%E4%B9%8B%E7%9C%9F%E6%9C%BA%E8%B0%83%E8%AF%95/</url>
       
-        <content type="html"><![CDATA[<h2 id="Ios指定模拟的设备类型"><a href="#Ios指定模拟的设备类型" class="headerlink" title="# Ios指定模拟的设备类型 "></a><font color="#337ab7"># Ios指定模拟的设备类型 </font></h2><p>你可以在终端中运行 xcrun simctl list 來查看具体可用的模拟器名称.<br>启动 react-native run-ios –simulator “iPhone 4s“。</p><p>你可以在终端中运行 xcrun simctl list devices 來查看具体可用的设备名称.<br>启动 react-native run-ios –device “iPhone 4s“。</p><h2 id="AndRoid指定模拟的设备类型"><a href="#AndRoid指定模拟的设备类型" class="headerlink" title="# AndRoid指定模拟的设备类型 "></a><font color="#337ab7"># AndRoid指定模拟的设备类型 </font></h2><p>你可以在终端中运行 adb devices 來查看具体可用的设备名称.<br>启动：react-native run-android –deviceId=”设备ID号”。</p><p>如需查看 AVD 名称的列表，请输入以下命令：emulator -list-avds<br>启动：emulator -avd avd_name</p>]]></content>
+        <content type="html"><![CDATA[<h2 id="Ios指定模拟的设备类型"><a href="#Ios指定模拟的设备类型" class="headerlink" title="# Ios指定模拟的设备类型 "></a><font color="#337ab7"># Ios指定模拟的设备类型 </font></h2><p>你可以在终端中运行 xcrun simctl list 來查看具体可用的模拟器名称.<br>启动 react-native run-ios –simulator “iPhone 4s“。</p><p>你可以在终端中运行 xctrace list devices 來查看具体可用的设备名称.<br>启动 react-native run-ios –device “iPhone 4s“。</p><h2 id="AndRoid指定模拟的设备类型"><a href="#AndRoid指定模拟的设备类型" class="headerlink" title="# AndRoid指定模拟的设备类型 "></a><font color="#337ab7"># AndRoid指定模拟的设备类型 </font></h2><p>你可以在终端中运行 adb devices 來查看具体可用的设备名称.<br>启动：react-native run-android –deviceId=”设备ID号”。</p><p>如需查看 AVD 名称的列表，请输入以下命令：emulator -list-avds<br>启动：emulator -avd avd_name</p>]]></content>
       
       
       
