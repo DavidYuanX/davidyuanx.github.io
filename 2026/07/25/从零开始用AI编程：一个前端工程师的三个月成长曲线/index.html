@@ -1,0 +1,214 @@
+<!DOCTYPE html><html lang="en"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="A front end siege division built ~"><title>从零开始用AI编程：一个前端工程师的三个月成长曲线 | David's blog</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="/js/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = 'https://hm.baidu.com/hm.js?' + 'b5b30c3f05f1d88ff91cf0f233b1fa32';
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+
+<!-- GrowingIO Analytics code version 2.1 -->
+<!-- Copyright 2015-2018 GrowingIO, Inc. More info available at http://www.growingio.com -->
+!function(e,t,n,g,i){e[i]=e[i]||function(){(e[i].q=e[i].q||[]).push(arguments)},n=t.createElement("script"),tag=t.getElementsByTagName("script")[0],n.async=1,n.src=('https:'==document.location.protocol?'https://':'http://')+g,tag.parentNode.insertBefore(n,tag)}(window,document,"script","assets.giocdn.com/2.1/gio.js","gio");
+  gio('init','9a2bc3f2970e279e', {});
+
+//custom page code begin here
+
+//custom page code end here
+
+gio('send');</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">从零开始用AI编程：一个前端工程师的三个月成长曲线</h1><a id="logo" href="/.">David's blog</a><p class="description">Welcome to my den</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> Home</i></a><a href="/archives/"><i class="fa fa-archive"> Archive</i></a><a href="/about/"><i class="fa fa-user"> About</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">从零开始用AI编程：一个前端工程师的三个月成长曲线</h1><div class="post-meta">Jul 25, 2026<span> | </span><span class="category"><a href="/categories/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/">技术随笔</a></span><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span></div><a class="disqus-comment-count" href="/2026/07/25/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%94%A8AI%E7%BC%96%E7%A8%8B%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E4%B8%89%E4%B8%AA%E6%9C%88%E6%88%90%E9%95%BF%E6%9B%B2%E7%BA%BF/#vcomment"> </a><div class="post-content"><h2 id="为什么写这篇"><a href="#为什么写这篇" class="headerlink" title="为什么写这篇"></a>为什么写这篇</h2><p>三个月前，我对AI编程的认知还停留在”聊天机器人帮我写写正则”。</p>
+<p>现在，我用AI改了37000行Java代码、写了定时任务、调了MQ消费者、优化了SQL查询。</p>
+<p><strong>我不是AI专家，只是个被迫用AI的前端工程师。</strong></p>
+<p>这篇文章记录我这三个月的真实经历——怎么从”不会用”到”离不开”，踩了哪些坑，效率提升了多少。</p>
+<hr>
+<h2 id="第一阶段：好奇但不会用（第1-2周）"><a href="#第一阶段：好奇但不会用（第1-2周）" class="headerlink" title="第一阶段：好奇但不会用（第1-2周）"></a>第一阶段：好奇但不会用（第1-2周）</h2><h3 id="刚开始的样子"><a href="#刚开始的样子" class="headerlink" title="刚开始的样子"></a>刚开始的样子</h3><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">我：帮我把这个Java方法改成TypeScript</span><br><span class="line">AI：好的，这是转换后的代码...</span><br><span class="line">我：（看不懂，不知道对不对）</span><br></pre></td></tr></table></figure>
+<p><strong>问题</strong>：</p>
+<ul>
+<li>不知道AI能做什么</li>
+<li>不知道该怎么问</li>
+<li>不知道AI给的答案对不对</li>
+</ul>
+<h3 id="第一个有用场景"><a href="#第一个有用场景" class="headerlink" title="第一个有用场景"></a>第一个有用场景</h3><p>帮我写正则表达式：</p>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">我：匹配手机号的正则</span><br><span class="line">AI：/^<span class="number">1</span>[<span class="number">3</span><span class="number">-9</span>]\d&#123;<span class="number">9</span>&#125;$/</span><br><span class="line"></span><br><span class="line">我：验证邮箱的正则</span><br><span class="line">AI：/^[^\s@]+@[^\s@]+\.[^\s@]+$/</span><br></pre></td></tr></table></figure>
+<p><strong>效率提升</strong>：以前要搜10分钟，现在10秒。</p>
+<h3 id="这个阶段的感受"><a href="#这个阶段的感受" class="headerlink" title="这个阶段的感受"></a>这个阶段的感受</h3><ul>
+<li>AI是个”高级搜索引擎”</li>
+<li>但也就这样了</li>
+<li>写复杂代码还是得靠自己</li>
+</ul>
+<hr>
+<h2 id="第二阶段：开始依赖（第3-4周）"><a href="#第二阶段：开始依赖（第3-4周）" class="headerlink" title="第二阶段：开始依赖（第3-4周）"></a>第二阶段：开始依赖（第3-4周）</h2><h3 id="转折点"><a href="#转折点" class="headerlink" title="转折点"></a>转折点</h3><p>接手了Java后端的需求，但我不会写Java。</p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">我：这个LEFT <span class="keyword">JOIN</span>为什么返回<span class="built_in">null</span>？</span><br><span class="line">AI：因为LEFT <span class="keyword">JOIN</span>会保留左表所有行，右表匹配不上就填<span class="built_in">null</span><span class="params">...</span></span><br><span class="line"></span><br><span class="line">我：那怎么改？</span><br><span class="line">AI：改成<span class="keyword">JOIN</span>（INNER <span class="keyword">JOIN</span>），没有付款记录的直接过滤掉<span class="params">...</span></span><br></pre></td></tr></table></figure>
+<p><strong>突然意识到</strong>：AI不仅能给我答案，还能<strong>教我为什么</strong>。</p>
+<h3 id="开始用的场景"><a href="#开始用的场景" class="headerlink" title="开始用的场景"></a>开始用的场景</h3><table>
+<thead>
+<tr>
+<th>场景</th>
+<th>以前</th>
+<th>现在</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>写正则</td>
+<td>搜Stack Overflow</td>
+<td>直接问AI</td>
+</tr>
+<tr>
+<td>查API</td>
+<td>翻文档</td>
+<td>问AI</td>
+</tr>
+<tr>
+<td>改Bug</td>
+<td>自己debug</td>
+<td>把错误信息给AI</td>
+</tr>
+<tr>
+<td>学新技术</td>
+<td>看教程</td>
+<td>让AI解释</td>
+</tr>
+</tbody>
+</table>
+<h3 id="这个阶段的坑"><a href="#这个阶段的坑" class="headerlink" title="这个阶段的坑"></a>这个阶段的坑</h3><p><strong>坑1：盲目信任</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// AI给的代码</span></span><br><span class="line">List&lt;String&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; data.size(); i++) &#123;</span><br><span class="line">    list.add(data.get(i).getName());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我直接复制粘贴，结果编译报错——<code>data</code>的类型不对。</p>
+<p><strong>教训</strong>：AI给的代码要<strong>先看一遍再复制</strong>。</p>
+<p><strong>坑2：问得太笼统</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">我：怎么写<span class="keyword">SQL</span>？</span><br><span class="line">AI：<span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> <span class="keyword">table</span> <span class="keyword">WHERE</span> condition...</span><br><span class="line"></span><br><span class="line">（废话，我当然知道基础语法）</span><br></pre></td></tr></table></figure>
+<p><strong>教训</strong>：问题要<strong>具体</strong>，带上上下文。</p>
+<hr>
+<h2 id="第三阶段：掌握套路（第5-8周）"><a href="#第三阶段：掌握套路（第5-8周）" class="headerlink" title="第三阶段：掌握套路（第5-8周）"></a>第三阶段：掌握套路（第5-8周）</h2><h3 id="学会了怎么问"><a href="#学会了怎么问" class="headerlink" title="学会了怎么问"></a>学会了怎么问</h3><p><strong>差的问法</strong>：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这个代码怎么改？</span><br></pre></td></tr></table></figure></p>
+<p><strong>好的问法</strong>：<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">我在改一个买家通用配置的定时任务，</span><br><span class="line">需要在配置失效时自动更新状态并记日志。</span><br><span class="line"></span><br><span class="line">现有代码：</span><br><span class="line">[粘贴代码]</span><br><span class="line"></span><br><span class="line">我的需求：</span><br><span class="line"><span class="bullet">1.</span> 每小时扫描一次</span><br><span class="line"><span class="bullet">2.</span> 找到即将失效的配置</span><br><span class="line"><span class="bullet">3.</span> 发出延迟MQ消息</span><br><span class="line"><span class="bullet">4.</span> Consumer收到后更新状态</span><br><span class="line"></span><br><span class="line">请问：</span><br><span class="line"><span class="bullet">1.</span> Job里怎么写扫描逻辑？</span><br><span class="line"><span class="bullet">2.</span> Consumer里怎么记日志？</span><br></pre></td></tr></table></figure></p>
+<p><strong>效率对比</strong>：</p>
+<ul>
+<li>以前问3轮才能得到想要的答案</li>
+<li>现在1轮就够</li>
+</ul>
+<h3 id="开始用AI做复杂任务"><a href="#开始用AI做复杂任务" class="headerlink" title="开始用AI做复杂任务"></a>开始用AI做复杂任务</h3><p><strong>任务1：改定时任务</strong></p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">我：我要新建一个定时任务，每小时扫描过期的配置，</span><br><span class="line">    然后发MQ消息让消费者更新状态。</span><br><span class="line">    </span><br><span class="line">    参考现有的<span class="keyword">BidServiceConfigJob写法，</span></span><br><span class="line"><span class="keyword"></span>    帮我写一个新的MlGoodsSkuPriceConfigJob。</span><br><span class="line">    </span><br><span class="line">    需要：</span><br><span class="line">    <span class="number">1</span>. 继承现有的<span class="keyword">Job模式</span></span><br><span class="line"><span class="keyword"></span>    <span class="number">2</span>. 查询未来<span class="number">1</span>小时内过期的配置</span><br><span class="line">    <span class="number">3</span>. 发送延迟MQ消息</span><br></pre></td></tr></table></figure>
+<p>AI给了完整的代码，我改了几个字段名就能用。</p>
+<p><strong>任务2：优化SQL</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">我：这个<span class="keyword">SQL</span>用了<span class="keyword">LEFT</span> <span class="keyword">JOIN</span>，</span><br><span class="line">    但我只需要判断&quot;有没有&quot;，</span><br><span class="line">    用fetchExists是不是更好？</span><br><span class="line">    </span><br><span class="line">    [粘贴旧代码]</span><br><span class="line">    </span><br><span class="line">    帮我改成新版，并解释为什么这么改。</span><br></pre></td></tr></table></figure>
+<p>AI不仅给了新代码，还解释了LEFT JOIN vs JOIN的区别。</p>
+<p><strong>任务3：写博客</strong></p>
+<p>这篇文章就是AI帮我写的初稿，我改了30%左右。</p>
+<h3 id="这个阶段的效率"><a href="#这个阶段的效率" class="headerlink" title="这个阶段的效率"></a>这个阶段的效率</h3><table>
+<thead>
+<tr>
+<th>任务</th>
+<th>不用AI</th>
+<th>用AI</th>
+<th>提升</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>写正则</td>
+<td>10分钟</td>
+<td>30秒</td>
+<td>20倍</td>
+</tr>
+<tr>
+<td>查API</td>
+<td>15分钟</td>
+<td>1分钟</td>
+<td>15倍</td>
+</tr>
+<tr>
+<td>改Bug</td>
+<td>1小时</td>
+<td>10分钟</td>
+<td>6倍</td>
+</tr>
+<tr>
+<td>学新技术</td>
+<td>半天</td>
+<td>1小时</td>
+<td>4倍</td>
+</tr>
+<tr>
+<td>写博客</td>
+<td>3小时</td>
+<td>1小时</td>
+<td>3倍</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="第四阶段：形成习惯（第9-12周）"><a href="#第四阶段：形成习惯（第9-12周）" class="headerlink" title="第四阶段：形成习惯（第9-12周）"></a>第四阶段：形成习惯（第9-12周）</h2><h3 id="现在的工作流"><a href="#现在的工作流" class="headerlink" title="现在的工作流"></a>现在的工作流</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> 接到需求</span><br><span class="line">   ↓</span><br><span class="line"><span class="bullet">2.</span> 先问AI：这个需求涉及哪些技术点？</span><br><span class="line">   ↓</span><br><span class="line"><span class="bullet">3.</span> 让AI给个方案（不一定用，但帮我理清思路）</span><br><span class="line">   ↓</span><br><span class="line"><span class="bullet">4.</span> 开始写代码</span><br><span class="line">   ↓</span><br><span class="line"><span class="bullet">5.</span> 遇到报错 → 把错误信息给AI</span><br><span class="line">   ↓</span><br><span class="line"><span class="bullet">6.</span> 写完 → 让AI review一遍</span><br><span class="line">   ↓</span><br><span class="line"><span class="bullet">7.</span> 提交</span><br></pre></td></tr></table></figure>
+<h3 id="最常用的是这几个"><a href="#最常用的是这几个" class="headerlink" title="最常用的是这几个"></a>最常用的是这几个</h3><p><strong>1. 解释代码</strong></p>
+<figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">我：这段代码在做什么？用前端思维解释一下。</span><br><span class="line"></span><br><span class="line">AI：这就像前端的useEffect...</span><br></pre></td></tr></table></figure>
+<p><strong>2. 给方案</strong></p>
+<figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">我：我要实现配置失效自动更新，</span><br><span class="line">    有几种方案？各自的优缺点是什么？</span><br><span class="line"></span><br><span class="line">AI：方案<span class="number">1</span>：定时轮询...</span><br><span class="line">    方案<span class="number">2</span>：延迟MQ...</span><br><span class="line">    方案<span class="number">3</span>：数据库触发器...</span><br></pre></td></tr></table></figure>
+<p><strong>3. Review代码</strong></p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">我：帮我看看这段代码有什么问题。</span><br><span class="line"></span><br><span class="line">AI：<span class="number">1.</span> 这里可能返回<span class="built_in">null</span><span class="params">...</span></span><br><span class="line">    <span class="number">2.</span> 这个循环可以优化<span class="params">...</span></span><br><span class="line">    <span class="number">3.</span> 建议加个空值判断<span class="params">...</span></span><br></pre></td></tr></table></figure>
+<p><strong>4. 写文档</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">我：帮我把这段代码的逻辑整理成文档，</span><br><span class="line">    要包含SQL对照表和前端类比。</span><br><span class="line"></span><br><span class="line">AI：<span class="selector-attr">[生成文档]</span></span><br></pre></td></tr></table></figure>
+<h3 id="这个阶段的感受-1"><a href="#这个阶段的感受-1" class="headerlink" title="这个阶段的感受"></a>这个阶段的感受</h3><ul>
+<li>AI不是”替代我”，是”增强我”</li>
+<li>最大的价值不是”写代码”，是”教我怎么想”</li>
+<li>效率提升是真实的，但不是无脑的</li>
+</ul>
+<hr>
+<h2 id="踩过的坑（血泪教训）"><a href="#踩过的坑（血泪教训）" class="headerlink" title="踩过的坑（血泪教训）"></a>踩过的坑（血泪教训）</h2><h3 id="坑1：AI会编造API"><a href="#坑1：AI会编造API" class="headerlink" title="坑1：AI会编造API"></a>坑1：AI会编造API</h3><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">我：Java里有没有类似Array<span class="selector-class">.filter</span>()的方法？</span><br><span class="line"></span><br><span class="line">AI：有，List<span class="selector-class">.stream</span>()<span class="selector-class">.filter</span>()...</span><br><span class="line"></span><br><span class="line">（这个是对的）</span><br><span class="line"></span><br><span class="line">我：那有没有List<span class="selector-class">.map</span>()？</span><br><span class="line"></span><br><span class="line">AI：有，List<span class="selector-class">.stream</span>()<span class="selector-class">.map</span>()...</span><br><span class="line"></span><br><span class="line">（这个也是对的）</span><br><span class="line"></span><br><span class="line">我：有没有List<span class="selector-class">.reduce</span>()？</span><br><span class="line"></span><br><span class="line">AI：有，List<span class="selector-class">.stream</span>()<span class="selector-class">.reduce</span>()...</span><br><span class="line"></span><br><span class="line">（这个还是对的，但AI开始编造不存在的参数了）</span><br></pre></td></tr></table></figure>
+<p><strong>教训</strong>：AI给的API要<strong>查官方文档确认</strong>。</p>
+<h3 id="坑2：AI不理解业务"><a href="#坑2：AI不理解业务" class="headerlink" title="坑2：AI不理解业务"></a>坑2：AI不理解业务</h3><figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">我：这个配置失效了要记日志。</span><br><span class="line"></span><br><span class="line">AI：好的，加一行<span class="keyword">log</span>.info()<span class="params">...</span></span><br><span class="line"></span><br><span class="line">（AI以为只是加个日志）</span><br><span class="line"></span><br><span class="line">我：不是，要记到数据库里，有专门的日志表。</span><br><span class="line"></span><br><span class="line">AI：哦，那需要调用bidServiceConfigLogService.save()<span class="params">...</span></span><br></pre></td></tr></table></figure>
+<p><strong>教训</strong>：AI不知道你的业务上下文，要<strong>说清楚</strong>。</p>
+<h3 id="坑3：AI会过度设计"><a href="#坑3：AI会过度设计" class="headerlink" title="坑3：AI会过度设计"></a>坑3：AI会过度设计</h3><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">我：帮我写个方法，判断配置是否过期。</span><br><span class="line"></span><br><span class="line">AI：[写了一个200行的方法，包含缓存、重试、监控、日志<span class="string">...</span>]</span><br><span class="line"></span><br><span class="line">我：我只是要个<span class="keyword">if</span>判断<span class="string">...</span></span><br></pre></td></tr></table></figure>
+<p><strong>教训</strong>：告诉AI<strong>你要什么</strong>，不是让它自由发挥。</p>
+<hr>
+<h2 id="效率对比（真实数据）"><a href="#效率对比（真实数据）" class="headerlink" title="效率对比（真实数据）"></a>效率对比（真实数据）</h2><h3 id="第一个月"><a href="#第一个月" class="headerlink" title="第一个月"></a>第一个月</h3><figure class="highlight erlang-repl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">总工作时间：<span class="number">160</span>小时</span><br><span class="line">其中用AI的时间：<span class="number">20</span>小时（<span class="number">12.5</span><span class="comment">%）</span></span><br><span class="line">AI帮我省的时间：约<span class="number">30</span>小时</span><br><span class="line">净效率提升：<span class="number">18</span><span class="comment">%</span></span><br></pre></td></tr></table></figure>
+<h3 id="第二个月"><a href="#第二个月" class="headerlink" title="第二个月"></a>第二个月</h3><figure class="highlight erlang-repl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">总工作时间：<span class="number">160</span>小时</span><br><span class="line">其中用AI的时间：<span class="number">50</span>小时（<span class="number">31</span><span class="comment">%）</span></span><br><span class="line">AI帮我省的时间：约<span class="number">80</span>小时</span><br><span class="line">净效率提升：<span class="number">50</span><span class="comment">%</span></span><br></pre></td></tr></table></figure>
+<h3 id="第三个月"><a href="#第三个月" class="headerlink" title="第三个月"></a>第三个月</h3><figure class="highlight erlang-repl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">总工作时间：<span class="number">160</span>小时</span><br><span class="line">其中用AI的时间：<span class="number">60</span>小时（<span class="number">37.5</span><span class="comment">%）</span></span><br><span class="line">AI帮我省的时间：约<span class="number">100</span>小时</span><br><span class="line">净效率提升：<span class="number">62</span><span class="comment">%</span></span><br></pre></td></tr></table></figure>
+<p><strong>趋势</strong>：用得越多，省得越多。</p>
+<hr>
+<h2 id="给新手的建议"><a href="#给新手的建议" class="headerlink" title="给新手的建议"></a>给新手的建议</h2><h3 id="1-从小事开始"><a href="#1-从小事开始" class="headerlink" title="1. 从小事开始"></a>1. 从小事开始</h3><p>不要一上来就让AI写整个项目。</p>
+<p>从这些开始：</p>
+<ul>
+<li>写正则</li>
+<li>查API</li>
+<li>解释报错</li>
+<li>格式化代码</li>
+</ul>
+<h3 id="2-学会问问题"><a href="#2-学会问问题" class="headerlink" title="2. 学会问问题"></a>2. 学会问问题</h3><p><strong>差的问法</strong>：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这个代码怎么改？</span><br></pre></td></tr></table></figure></p>
+<p><strong>好的问法</strong>：<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">我在改一个Java定时任务，</span><br><span class="line">需要在配置失效时记日志到数据库。</span><br><span class="line"></span><br><span class="line">现有代码：[粘贴]</span><br><span class="line">日志表结构：[粘贴]</span><br><span class="line"></span><br><span class="line">请问：</span><br><span class="line"><span class="bullet">1.</span> 在哪里加日志逻辑？</span><br><span class="line"><span class="bullet">2.</span> 调用哪个Service？</span><br><span class="line"><span class="bullet">3.</span> 日志表需要哪些字段？</span><br></pre></td></tr></table></figure></p>
+<h3 id="3-永远不要盲目复制"><a href="#3-永远不要盲目复制" class="headerlink" title="3. 永远不要盲目复制"></a>3. 永远不要盲目复制</h3><p>AI给的代码：</p>
+<ol>
+<li>先看一遍</li>
+<li>理解逻辑</li>
+<li>确认API存在</li>
+<li>再复制</li>
+</ol>
+<h3 id="4-把AI当老师，不是工具"><a href="#4-把AI当老师，不是工具" class="headerlink" title="4. 把AI当老师，不是工具"></a>4. 把AI当老师，不是工具</h3><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">不要只问<span class="string">&quot;怎么写&quot;</span>，</span><br><span class="line">要问<span class="string">&quot;为什么这么写&quot;</span>。</span><br><span class="line"></span><br><span class="line">不要只问<span class="string">&quot;这个报错怎么修&quot;</span>，</span><br><span class="line">要问<span class="string">&quot;这个报错是什么意思&quot;</span>。</span><br></pre></td></tr></table></figure>
+<h3 id="5-接受不完美"><a href="#5-接受不完美" class="headerlink" title="5. 接受不完美"></a>5. 接受不完美</h3><p>AI给的方案不一定是最优的，但通常是<strong>够用的</strong>。</p>
+<p><strong>完成比完美重要。</strong></p>
+<hr>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>三个月前，我觉得AI编程是”骗人的”。</p>
+<p>两个月前，我觉得AI编程是”有点用的”。</p>
+<p>一个月前，我觉得AI编程是”离不开的”。</p>
+<p>现在，我觉得AI编程是<strong>“前端工程师转全栈的捷径”</strong>。</p>
+<p>我不是说AI能让你变成专家，但AI能让你<strong>快速上手</strong>。</p>
+<p><strong>三个月前我不会写Java，现在我会改定时任务、会优化SQL、会写MQ Consumer。</strong></p>
+<p>这不是因为我突然变聪明了，是因为AI帮我<strong>跳过了最痛苦的入门阶段</strong>。</p>
+<p>如果你也是前端，也在考虑要不要用AI辅助编程，我的建议是：</p>
+<p><strong>从今天开始，每天用一次。</strong></p>
+<p>不用多，一次就够。</p>
+<p>三个月后，你会回来感谢我的。</p>
+<hr>
+<p><em>本文基于作者2026年4-7月的真实经历，所有效率数据来自个人时间记录。</em></p>
+<p><em>下一篇预告：《AI协作流程：怎么给AI提需求，怎么review AI写的代码》——更进阶的AI使用技巧。</em></p>
+</div><iframe src="/donate/?AliPayQR=/img/alipay.jpeg&amp;WeChatQR=null&amp;GitHub=https://github.com/DavidYuanX&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=null" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div class="tags"><a href="/tags/AI/">AI</a><a href="/tags/%E7%BC%96%E7%A8%8B/">编程</a><a href="/tags/%E6%95%88%E7%8E%87%EF%BC%8C%E6%88%90%E9%95%BF%EF%BC%8CClaude/">效率，成长，Claude</a><a href="/tags/Cursor/">Cursor</a></div><div class="post-nav"><a class="next" href="/2026/07/24/%E4%B8%80%E4%B8%AA%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88%E8%A2%AB%E8%BF%AB%E6%94%B9%E4%BA%8637000%E8%A1%8CJava%E4%BB%A3%E7%A0%81/">一个前端工程师，被迫改了37000行Java代码</a></div><div id="vcomment"></div><link rel="stylesheet" type="text/css" href="//unpkg.com/@waline/client@v2/dist/waline.css"><script src="//unpkg.com/@waline/client@v2/dist/waline.js"></script><script>const waline = Waline.init({
+  el: '#vcomment',
+  path: decodeURI(location.pathname) || '/',
+  lang: 'zh-cn',
+  serverURL: 'https://vercel-xi-gilt.vercel.app',
+  pageSize:'10'
+});</script></div></div></div><aside class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="search-form"><input class="popup-trigger" placeholder="Search" readonly="readonly"/></div></div><div class="toc-article" id="toc"><div class="toc-title">Categories<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%86%99%E8%BF%99%E7%AF%87"><span class="toc-number">1.</span> <span class="toc-text">为什么写这篇</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%EF%BC%9A%E5%A5%BD%E5%A5%87%E4%BD%86%E4%B8%8D%E4%BC%9A%E7%94%A8%EF%BC%88%E7%AC%AC1-2%E5%91%A8%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">第一阶段：好奇但不会用（第1-2周）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9A%E5%BC%80%E5%A7%8B%E7%9A%84%E6%A0%B7%E5%AD%90"><span class="toc-number">2.1.</span> <span class="toc-text">刚开始的样子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%9C%89%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">2.2.</span> <span class="toc-text">第一个有用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%99%E4%B8%AA%E9%98%B6%E6%AE%B5%E7%9A%84%E6%84%9F%E5%8F%97"><span class="toc-number">2.3.</span> <span class="toc-text">这个阶段的感受</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%EF%BC%9A%E5%BC%80%E5%A7%8B%E4%BE%9D%E8%B5%96%EF%BC%88%E7%AC%AC3-4%E5%91%A8%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">第二阶段：开始依赖（第3-4周）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AC%E6%8A%98%E7%82%B9"><span class="toc-number">3.1.</span> <span class="toc-text">转折点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%A7%8B%E7%94%A8%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="toc-number">3.2.</span> <span class="toc-text">开始用的场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%99%E4%B8%AA%E9%98%B6%E6%AE%B5%E7%9A%84%E5%9D%91"><span class="toc-number">3.3.</span> <span class="toc-text">这个阶段的坑</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%EF%BC%9A%E6%8E%8C%E6%8F%A1%E5%A5%97%E8%B7%AF%EF%BC%88%E7%AC%AC5-8%E5%91%A8%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">第三阶段：掌握套路（第5-8周）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%A6%E4%BC%9A%E4%BA%86%E6%80%8E%E4%B9%88%E9%97%AE"><span class="toc-number">4.1.</span> <span class="toc-text">学会了怎么问</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%A7%8B%E7%94%A8AI%E5%81%9A%E5%A4%8D%E6%9D%82%E4%BB%BB%E5%8A%A1"><span class="toc-number">4.2.</span> <span class="toc-text">开始用AI做复杂任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%99%E4%B8%AA%E9%98%B6%E6%AE%B5%E7%9A%84%E6%95%88%E7%8E%87"><span class="toc-number">4.3.</span> <span class="toc-text">这个阶段的效率</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E9%98%B6%E6%AE%B5%EF%BC%9A%E5%BD%A2%E6%88%90%E4%B9%A0%E6%83%AF%EF%BC%88%E7%AC%AC9-12%E5%91%A8%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">第四阶段：形成习惯（第9-12周）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8E%B0%E5%9C%A8%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="toc-number">5.1.</span> <span class="toc-text">现在的工作流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%B8%B8%E7%94%A8%E7%9A%84%E6%98%AF%E8%BF%99%E5%87%A0%E4%B8%AA"><span class="toc-number">5.2.</span> <span class="toc-text">最常用的是这几个</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%99%E4%B8%AA%E9%98%B6%E6%AE%B5%E7%9A%84%E6%84%9F%E5%8F%97-1"><span class="toc-number">5.3.</span> <span class="toc-text">这个阶段的感受</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B8%A9%E8%BF%87%E7%9A%84%E5%9D%91%EF%BC%88%E8%A1%80%E6%B3%AA%E6%95%99%E8%AE%AD%EF%BC%89"><span class="toc-number">6.</span> <span class="toc-text">踩过的坑（血泪教训）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9D%911%EF%BC%9AAI%E4%BC%9A%E7%BC%96%E9%80%A0API"><span class="toc-number">6.1.</span> <span class="toc-text">坑1：AI会编造API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9D%912%EF%BC%9AAI%E4%B8%8D%E7%90%86%E8%A7%A3%E4%B8%9A%E5%8A%A1"><span class="toc-number">6.2.</span> <span class="toc-text">坑2：AI不理解业务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9D%913%EF%BC%9AAI%E4%BC%9A%E8%BF%87%E5%BA%A6%E8%AE%BE%E8%AE%A1"><span class="toc-number">6.3.</span> <span class="toc-text">坑3：AI会过度设计</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%88%E7%8E%87%E5%AF%B9%E6%AF%94%EF%BC%88%E7%9C%9F%E5%AE%9E%E6%95%B0%E6%8D%AE%EF%BC%89"><span class="toc-number">7.</span> <span class="toc-text">效率对比（真实数据）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%9C%88"><span class="toc-number">7.1.</span> <span class="toc-text">第一个月</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E4%B8%AA%E6%9C%88"><span class="toc-number">7.2.</span> <span class="toc-text">第二个月</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E4%B8%AA%E6%9C%88"><span class="toc-number">7.3.</span> <span class="toc-text">第三个月</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%99%E6%96%B0%E6%89%8B%E7%9A%84%E5%BB%BA%E8%AE%AE"><span class="toc-number">8.</span> <span class="toc-text">给新手的建议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%BB%8E%E5%B0%8F%E4%BA%8B%E5%BC%80%E5%A7%8B"><span class="toc-number">8.1.</span> <span class="toc-text">1. 从小事开始</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%AD%A6%E4%BC%9A%E9%97%AE%E9%97%AE%E9%A2%98"><span class="toc-number">8.2.</span> <span class="toc-text">2. 学会问问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%B0%B8%E8%BF%9C%E4%B8%8D%E8%A6%81%E7%9B%B2%E7%9B%AE%E5%A4%8D%E5%88%B6"><span class="toc-number">8.3.</span> <span class="toc-text">3. 永远不要盲目复制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%8A%8AAI%E5%BD%93%E8%80%81%E5%B8%88%EF%BC%8C%E4%B8%8D%E6%98%AF%E5%B7%A5%E5%85%B7"><span class="toc-number">8.4.</span> <span class="toc-text">4. 把AI当老师，不是工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%8E%A5%E5%8F%97%E4%B8%8D%E5%AE%8C%E7%BE%8E"><span class="toc-number">8.5.</span> <span class="toc-text">5. 接受不完美</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="toc-number">9.</span> <span class="toc-text">写在最后</span></a></li></ol></div></div></div></aside><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2026 <a href="/." rel="nofollow">David's blog.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv"><i class="fa fa-eye" aria-hidden="true"></i> <span id="busuanzi_value_site_pv"></span> times</span></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="/js/search.js?v=0.0.0"></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+   search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script type="text/javascript" src="/js/underscore-min.js"></script><script type="text/javascript" src="/js/inView.js"></script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>

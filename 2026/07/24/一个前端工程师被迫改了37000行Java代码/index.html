@@ -1,0 +1,195 @@
+<!DOCTYPE html><html lang="en"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="A front end siege division built ~"><title>一个前端工程师，被迫改了37000行Java代码 | David's blog</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="/js/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = 'https://hm.baidu.com/hm.js?' + 'b5b30c3f05f1d88ff91cf0f233b1fa32';
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+
+<!-- GrowingIO Analytics code version 2.1 -->
+<!-- Copyright 2015-2018 GrowingIO, Inc. More info available at http://www.growingio.com -->
+!function(e,t,n,g,i){e[i]=e[i]||function(){(e[i].q=e[i].q||[]).push(arguments)},n=t.createElement("script"),tag=t.getElementsByTagName("script")[0],n.async=1,n.src=('https:'==document.location.protocol?'https://':'http://')+g,tag.parentNode.insertBefore(n,tag)}(window,document,"script","assets.giocdn.com/2.1/gio.js","gio");
+  gio('init','9a2bc3f2970e279e', {});
+
+//custom page code begin here
+
+//custom page code end here
+
+gio('send');</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">一个前端工程师，被迫改了37000行Java代码</h1><a id="logo" href="/.">David's blog</a><p class="description">Welcome to my den</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> Home</i></a><a href="/archives/"><i class="fa fa-archive"> Archive</i></a><a href="/about/"><i class="fa fa-user"> About</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">一个前端工程师，被迫改了37000行Java代码</h1><div class="post-meta">Jul 24, 2026<span> | </span><span class="category"><a href="/categories/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/">技术随笔</a></span><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span></div><a class="disqus-comment-count" href="/2026/07/24/%E4%B8%80%E4%B8%AA%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88%E8%A2%AB%E8%BF%AB%E6%94%B9%E4%BA%8637000%E8%A1%8CJava%E4%BB%A3%E7%A0%81/#vcomment"> </a><div class="post-content"><h2 id="故事开始"><a href="#故事开始" class="headerlink" title="故事开始"></a>故事开始</h2><p>上个月，我接了个需求。</p>
+<p>CTO说：”你先研究一下某二手回收公司的后端架构，然后改个接口。”</p>
+<p>我说：”好。”</p>
+<p>然后他甩给我一个Java后端项目，说：”后端也要改一下，加个失效日志。”</p>
+<p>我看着屏幕上25个微服务、37000多个Java文件、LEFT JOIN、INNER JOIN、JOOQ、MQ、定时任务、Feign Client、Redis分布式锁……</p>
+<p><strong>每个词我都认识，连起来不知道在干嘛。</strong></p>
+<hr>
+<h2 id="第一关：看不懂代码"><a href="#第一关：看不懂代码" class="headerlink" title="第一关：看不懂代码"></a>第一关：看不懂代码</h2><p>我打开某二手回收公司的后端代码。</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">recycle<span class="symbol">/</span>           ← 回收业务，<span class="number">15</span>个微服务</span><br><span class="line">── online-sapi<span class="symbol">/</span>       ← 线上回收</span><br><span class="line">├── offline-sapi<span class="symbol">/</span>      ← 线下回收  </span><br><span class="line">├── order-api<span class="symbol">/</span>         ← 订单中心</span><br><span class="line">├── shanhs-ai-audit<span class="symbol">/</span>   ← AI审核系统</span><br><span class="line">└── ...（还有<span class="number">11</span>个）</span><br><span class="line"></span><br><span class="line">boss<span class="symbol">/</span>              ← 后台管理，<span class="number">4</span>个微服务</span><br><span class="line">sales<span class="symbol">/</span>             ← 销售业务，<span class="number">6</span>个微服务</span><br></pre></td></tr></table></figure>
+<p><strong>25个微服务，37000个Java文件。</strong></p>
+<p>我打开一个Service文件，看到的是：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BidServiceConfigService</span> <span class="keyword">extends</span> <span class="title class_">GenericServiceImpl</span>&lt;BidServiceConfig, Integer&gt; &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    BidServiceConfigLogService bidServiceConfigLogService;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    DSLContext dslContext;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    AliMQProducter mqProducter;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// ... 还有20个依赖</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>GenericServiceImpl是什么？DSLContext是什么？AliMQProducter是什么？</strong></p>
+<p>我打开了前端项目的Service文件做对比：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 前端</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">BidService</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params"></span></span><br><span class="line"><span class="params">    <span class="keyword">private</span> <span class="attr">http</span>: <span class="title class_">HttpClient</span>,</span></span><br><span class="line"><span class="params">    <span class="keyword">private</span> <span class="attr">log</span>: <span class="title class_">LogService</span>,</span></span><br><span class="line"><span class="params">    <span class="keyword">private</span> <span class="attr">mq</span>: <span class="title class_">MQService</span></span></span><br><span class="line"><span class="params">  </span>) &#123;&#125;</span><br><span class="line">  </span><br><span class="line">  <span class="title function_">getConfig</span>(<span class="params"><span class="attr">id</span>: <span class="built_in">number</span></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">http</span>.<span class="title function_">get</span>(<span class="string">`/api/config/<span class="subst">$&#123;id&#125;</span>`</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>这不是一样的东西吗？</strong></p>
+<p>前端：<code>constructor(依赖)</code><br>后端：<code>@Autowired 依赖</code></p>
+<p>前端：<code>this.http.get()</code><br>后端：<code>dslContext.select().from().where()</code></p>
+<p><strong>只是语法不同，做的事情一样。</strong></p>
+<hr>
+<h2 id="第二关：改了第一行代码"><a href="#第二关：改了第一行代码" class="headerlink" title="第二关：改了第一行代码"></a>第二关：改了第一行代码</h2><p>我的第一个任务是：<strong>给买家通用配置加一个失效日志。</strong></p>
+<p>老板说：”现在配置生效有日志，失效没有日志，你加一下。”</p>
+<p>我看了代码，发现逻辑是这样的：</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">定时任务（每小时扫描）</span><br><span class="line">    │</span><br><span class="line">    ▼</span><br><span class="line">找到即将失效的配置</span><br><span class="line">    │</span><br><span class="line">    ▼</span><br><span class="line">发出延迟MQ消息（到失效时间点）</span><br><span class="line">    │</span><br><span class="line">    ▼</span><br><span class="line">MQ Consumer收到消息</span><br><span class="line">    │</span><br><span class="line">    ▼</span><br><span class="line">更新状态 IS_VALID <span class="operator">=</span> false  ← 这里！</span><br></pre></td></tr></table></figure>
+<p>我只需要在最后一步加上记日志的代码。</p>
+<h3 id="前端思维版"><a href="#前端思维版" class="headerlink" title="前端思维版"></a>前端思维版</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果是前端，我会这么写</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">expireConfig</span>(<span class="params"><span class="attr">config</span>: <span class="title class_">Config</span></span>) &#123;</span><br><span class="line">  config.<span class="property">isValid</span> = <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">await</span> <span class="title function_">saveLog</span>(config.<span class="property">id</span>, <span class="string">&#x27;配置失效&#x27;</span>);  <span class="comment">// 加这一行</span></span><br><span class="line">  <span class="keyword">await</span> <span class="title function_">updateConfig</span>(config);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="后端实现"><a href="#后端实现" class="headerlink" title="后端实现"></a>后端实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 我写了这个</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">updateStatusWithLog</span><span class="params">(BidServiceConfig config, Boolean isValid, String desc)</span> &#123;</span><br><span class="line">    <span class="comment">// 状态变了才记日志</span></span><br><span class="line">    <span class="keyword">if</span> (!Objects.equals(config.getIsValid(), isValid)) &#123;</span><br><span class="line">        <span class="type">BidServiceConfigLog</span> <span class="variable">log</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BidServiceConfigLog</span>();</span><br><span class="line">        log.setConfigId(config.getId());</span><br><span class="line">        log.setBeforeOperation(<span class="string">&quot;配置状态:&quot;</span> + getStatusName(config.getIsValid()));</span><br><span class="line">        log.setAfterOperation(<span class="string">&quot;配置状态:&quot;</span> + getStatusName(isValid) + <span class="string">&quot;(&quot;</span> + desc + <span class="string">&quot;)&quot;</span>);</span><br><span class="line">        log.setChangeType(<span class="string">&quot;Status&quot;</span>);</span><br><span class="line">        bidServiceConfigLogService.save(log);  <span class="comment">// ← 加的就是这行</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 更新状态</span></span><br><span class="line">    <span class="type">BidServiceConfig</span> <span class="variable">update</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BidServiceConfig</span>();</span><br><span class="line">    update.setId(config.getId());</span><br><span class="line">    update.setIsValid(isValid);</span><br><span class="line">    update(update);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>写完一跑，通过了。</strong></p>
+<p>我突然发现：<strong>后端开发不就是写函数吗？</strong></p>
+<hr>
+<h2 id="第三关：JOIN的血泪教训"><a href="#第三关：JOIN的血泪教训" class="headerlink" title="第三关：JOIN的血泪教训"></a>第三关：JOIN的血泪教训</h2><p>接下来，老板让我优化一个方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 旧版：LEFT JOIN + Java判断</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">hasRecycleAccountBuyerPaymentInProgress</span><span class="params">(Long prdDetailId)</span> &#123;</span><br><span class="line">    <span class="type">Integer</span> <span class="variable">payOrderStatus</span> <span class="operator">=</span> dao.execute(e -&gt; e</span><br><span class="line">        .select(ORD_PAYORDER.STATUS)</span><br><span class="line">        .from(BID_MAIN_ORDER)</span><br><span class="line">        .leftJoin(BID_MAIN_ORDER_OFFER).on(...)  <span class="comment">// ← LEFT JOIN</span></span><br><span class="line">        .leftJoin(ORD_PAYORDER).on(...)           <span class="comment">// ← LEFT JOIN</span></span><br><span class="line">        .where(...)</span><br><span class="line">        .fetchOneInto(Integer.class));</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 在Java里判断</span></span><br><span class="line">    <span class="keyword">return</span> Objects.equals(payOrderStatus, ProductFinanceStatus.PAYING);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>问题是：<strong>LEFT JOIN可能返回null</strong>，然后 <code>Objects.equals(null, 2)</code> 返回false。</p>
+<p>虽然结果是对的，但逻辑不严谨——<strong>没有付款记录 ≠ 不在支付中</strong>。</p>
+<h3 id="前端思维版-1"><a href="#前端思维版-1" class="headerlink" title="前端思维版"></a>前端思维版</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 前端怎么做的？</span></span><br><span class="line"><span class="comment">// 1. 先查所有数据（LEFT JOIN）</span></span><br><span class="line"><span class="keyword">const</span> orders = <span class="keyword">await</span> db.<span class="title function_">query</span>(<span class="string">&quot;SELECT * FROM orders WHERE productId = 123&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 在JS里过滤</span></span><br><span class="line"><span class="keyword">const</span> isPaying = orders.<span class="title function_">some</span>(<span class="function"><span class="params">o</span> =&gt;</span> o.<span class="property">payStatus</span> === <span class="string">&#x27;PAYING&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p><strong>前端是”查出来再判断”，后端可以”让数据库直接告诉我有还是没有”。</strong></p>
+<h3 id="优化后的版本"><a href="#优化后的版本" class="headerlink" title="优化后的版本"></a>优化后的版本</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 新版：JOIN + EXISTS</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">hasRecycleAccountBuyerPaymentInProgress</span><span class="params">(Long prdDetailId)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> dao.execute(e -&gt; e.fetchExists(</span><br><span class="line">        e.selectOne()</span><br><span class="line">        .from(BID_MAIN_ORDER)</span><br><span class="line">        .join(BID_MAIN_ORDER_OFFER).on(...)    <span class="comment">// ← 改成JOIN</span></span><br><span class="line">        .join(ORD_PAYORDER).on(...)            <span class="comment">// ← 改成JOIN</span></span><br><span class="line">        .where(...)</span><br><span class="line">        .and(ORD_PAYORDER.STATUS.eq(ProductFinanceStatus.PAYING))  <span class="comment">// ← 直接写在SQL里</span></span><br><span class="line">    ));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>改动：</strong></p>
+<ul>
+<li>LEFT JOIN → JOIN（没有付款记录的直接过滤掉）</li>
+<li>Java层判断 → SQL层过滤（STATUS=PAYING直接写在WHERE里）</li>
+<li>返回Integer再判断 → 直接返回true/false</li>
+</ul>
+<p><strong>为什么这么改？</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span>：像Excel的VLOOKUP，找不到就返回空</span><br><span class="line"><span class="keyword">JOIN</span>：像<span class="keyword">SQL</span>的<span class="keyword">WHERE</span>，找不到就不返回这行</span><br><span class="line"></span><br><span class="line">你要回答的问题是&quot;有没有&quot;，不是&quot;是什么&quot;。</span><br><span class="line">既然都不需要，不如让数据库直接过滤掉。</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="第四关：SQL也不会写了"><a href="#第四关：SQL也不会写了" class="headerlink" title="第四关：SQL也不会写了"></a>第四关：SQL也不会写了</h2><p>我写了十年前端，<code>SELECT * FROM</code> 都快忘了。</p>
+<p>JOOQ是什么鬼？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dao.create()</span><br><span class="line">  .select(BID_SERVICE_CONFIG.fields())</span><br><span class="line">  .from(BID_SERVICE_CONFIG)</span><br><span class="line">  .where(BID_SERVICE_CONFIG.ID.eq(id))</span><br><span class="line">  .fetchOneInto(BidServiceConfig.class);</span><br></pre></td></tr></table></figure>
+<p>我看了半天，突然反应过来：</p>
+<p><strong>这不就是用Java写SQL吗？</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> bid_service_config <span class="keyword">WHERE</span> id <span class="operator">=</span> ?</span><br></pre></td></tr></table></figure>
+<p><strong>JOOQ = 类型安全的SQL构建器。</strong></p>
+<ul>
+<li><code>select(fields())</code> → <code>SELECT *</code></li>
+<li><code>from(TABLE)</code> → <code>FROM 表</code></li>
+<li><code>where(COLUMN.eq(value))</code> → <code>WHERE 列 = ?</code></li>
+<li><code>fetchOneInto(Class)</code> → 返回一个对象</li>
+</ul>
+<p><strong>为什么用JOOQ不用MyBatis？</strong></p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">MyBatis：写<span class="type">XML</span>，<span class="keyword">SQL</span>和Java分开</span><br><span class="line">  → <span class="keyword">SQL</span>写错了，运行时才报错</span><br><span class="line"></span><br><span class="line">JOOQ：写Java，<span class="keyword">SQL</span>在代码里</span><br><span class="line">  → <span class="keyword">SQL</span>写错了，编译时就报错</span><br></pre></td></tr></table></figure>
+<p><strong>前端类比：</strong></p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// MyBatis = 写SQL字符串（像内联样式）</span></span><br><span class="line"><span class="keyword">const</span> sql = <span class="string">&quot;SELECT * FROM users WHERE id = &quot;</span> + userId;  <span class="comment">// 容易SQL注入</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// JOOQ = 用API构建查询（像CSS-in-JS）</span></span><br><span class="line">db.<span class="title function_">select</span>().<span class="title function_">from</span>(users).<span class="title function_">where</span>(users.<span class="property">id</span>.<span class="title function_">eq</span>(userId));  <span class="comment">// 类型安全</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="第五关：其实已经会了"><a href="#第五关：其实已经会了" class="headerlink" title="第五关：其实已经会了"></a>第五关：其实已经会了</h2><p>一个月后，我回头看自己改过的代码：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">✅ 新建了定时任务 Job（每小时扫描过期配置）</span><br><span class="line">✅ 改了 MQ Consumer（加日志记录）</span><br><span class="line">✅ 新建了 updateStatusWithLog 方法（更新<span class="operator">+</span>记日志）</span><br><span class="line">✅ 优化了 hasRecycleAccountBuyerPaymentInProgress（<span class="keyword">LEFT</span> <span class="keyword">JOIN</span> → <span class="keyword">JOIN</span>）</span><br><span class="line">✅ 用<span class="keyword">SQL</span>验证了业务逻辑（写了<span class="number">20</span><span class="operator">+</span>条查询）</span><br><span class="line">✅ 写了前端→后端对照表（帮自己理解）</span><br></pre></td></tr></table></figure>
+<p><strong>这些都是后端开发。</strong></p>
+<p>我突然发现：<strong>我不是”不会写后端”，我是”不熟后端语法”。</strong></p>
+<hr>
+<h2 id="前端→后端对照表"><a href="#前端→后端对照表" class="headerlink" title="前端→后端对照表"></a>前端→后端对照表</h2><p>这是我总结的对照表，帮自己理解：</p>
+<table>
+<thead>
+<tr>
+<th>前端（JS/TS）</th>
+<th>后端（Java）</th>
+<th>实际代码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>list.filter(x =&gt; x.id &gt; 0)</code></td>
+<td><code>stream().filter(x -&gt; x.getId() &gt; 0)</code></td>
+<td>✅ <code>PdProductRefundServiceImpl</code></td>
+</tr>
+<tr>
+<td><code>list.map(x =&gt; x.name)</code></td>
+<td><code>stream().map(X::getName)</code></td>
+<td>✅ <code>OperationManagementService</code></td>
+</tr>
+<tr>
+<td><code>obj?.name ?? &#39;默认&#39;</code></td>
+<td><code>StringUtils.defaultIfBlank(obj.getName(), &quot;默认&quot;)</code></td>
+<td>✅ <code>MlGoodsSkuPriceConfigService</code></td>
+</tr>
+<tr>
+<td><code>if (obj == null)</code></td>
+<td><code>if (Objects.isNull(obj))</code></td>
+<td>✅ <code>BidServiceConfigConsumer</code></td>
+</tr>
+<tr>
+<td><code>axios.post(&#39;/api&#39;, data)</code></td>
+<td><code>@PostMapping</code> + <code>@RequestBody</code></td>
+<td>✅ 所有Controller</td>
+</tr>
+<tr>
+<td><code>const { id, name } = obj</code></td>
+<td><code>obj.getId()</code>, <code>obj.getName()</code></td>
+<td>✅ 到处都在用</td>
+</tr>
+<tr>
+<td><code>try { } catch(e) {}</code></td>
+<td><code>try { } catch(Exception e) {}</code></td>
+<td>✅ 各种Service</td>
+</tr>
+<tr>
+<td><code>VLOOKUP找不到返回空</code></td>
+<td><code>LEFT JOIN找不到返回null</code></td>
+<td>✅ 我踩的坑</td>
+</tr>
+<tr>
+<td><code>Array.filter().length &gt; 0</code></td>
+<td><code>stream().anyMatch()</code></td>
+<td>✅ <code>BidServiceConfigService</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>后端就是前端换了个语法。</strong></p>
+<hr>
+<h2 id="我学到的几件事"><a href="#我学到的几件事" class="headerlink" title="我学到的几件事"></a>我学到的几件事</h2><h3 id="1-全栈不是”什么都会”，是”需要什么学什么”"><a href="#1-全栈不是”什么都会”，是”需要什么学什么”" class="headerlink" title="1. 全栈不是”什么都会”，是”需要什么学什么”"></a>1. 全栈不是”什么都会”，是”需要什么学什么”</h3><p>我不需要学完Java所有语法，我只需要知道：</p>
+<ul>
+<li>怎么接收请求（Controller）</li>
+<li>怎么写业务逻辑（Service）</li>
+<li>怎么查数据库（JOOQ/MyBatis）</li>
+<li>怎么发异步消息（MQ）</li>
+<li>怎么写定时任务（Job）</li>
+</ul>
+<p><strong>其他的东西，遇到了再学。</strong></p>
+<h3 id="2-前端思维在后端也适用"><a href="#2-前端思维在后端也适用" class="headerlink" title="2. 前端思维在后端也适用"></a>2. 前端思维在后端也适用</h3><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">前端：组件 → 状态 → 渲染</span><br><span class="line">后端：请求 → 逻辑 → 数据库</span><br><span class="line"></span><br><span class="line">把<span class="string">&quot;请求&quot;</span>当成<span class="string">&quot;用户点击&quot;</span>，</span><br><span class="line">把<span class="string">&quot;逻辑&quot;</span>当成<span class="string">&quot;函数调用&quot;</span>，</span><br><span class="line">把<span class="string">&quot;数据库&quot;</span>当成<span class="string">&quot;后端API&quot;</span>。</span><br></pre></td></tr></table></figure>
+<h3 id="3-最大的障碍不是技术，是心理"><a href="#3-最大的障碍不是技术，是心理" class="headerlink" title="3. 最大的障碍不是技术，是心理"></a>3. 最大的障碍不是技术，是心理</h3><p>我看到37000个Java文件时，第一反应是：”我不会。”</p>
+<p>但真正开始改代码后，发现：</p>
+<ul>
+<li>改一个方法，就改一个方法</li>
+<li>加一个日志，就加一行代码</li>
+<li>优化一个SQL，就改几个JOIN</li>
+</ul>
+<p><strong>都是小事，一件一件做，就做完了。</strong></p>
+<h3 id="4-给自己三个月"><a href="#4-给自己三个月" class="headerlink" title="4. 给自己三个月"></a>4. 给自己三个月</h3><p>如果我现在问自己：”三个月前你会写Java后端吗？”</p>
+<p>答案是：<strong>不会。</strong></p>
+<p>“现在呢？”</p>
+<p><strong>会一点。</strong></p>
+<p>会写定时任务、会改MQ Consumer、会优化SQL、会用JOOQ查数据库。</p>
+<p><strong>不是”精通”，是”能用”。</strong></p>
+<p>这就够了。</p>
+<hr>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>这篇文章不是”前端转全栈教程”，是<strong>“一个前端工程师的真实经历”</strong>。</p>
+<p>我没有系统学过Java，没有看过《Java核心技术》，没有刷过LeetCode。</p>
+<p>我就是<strong>接了个需求，被迫改代码，遇到问题查资料，改完了发现”其实我也会”。</strong></p>
+<p>如果你也是前端，也在考虑要不要搞后端，我的建议是：</p>
+<p><strong>别想”我能不能学会”，想”我需不需要用”。</strong></p>
+<p>需要用，就学。<br>用到了，就会了。<br>会了，就继续用。</p>
+<p><strong>三个月后，你也会说：”其实我也会写后端。”</strong></p>
+<hr>
+<p><em>本文基于作者2026年6-7月的真实项目经历，代码来自某二手回收公司后端项目（已脱敏）。</em></p>
+<p><em>下一篇预告：《前端转全栈：我需要的不是学Java，是这张地图》——后端技术全景图，一张图看懂后端有哪些东西。</em></p>
+</div><iframe src="/donate/?AliPayQR=/img/alipay.jpeg&amp;WeChatQR=null&amp;GitHub=https://github.com/DavidYuanX&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=null" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div class="tags"><a href="/tags/Java/">Java</a><a href="/tags/%E5%89%8D%E7%AB%AF/">前端</a><a href="/tags/%E5%85%A8%E6%A0%88/">全栈</a><a href="/tags/%E6%88%90%E9%95%BF/">成长</a><a href="/tags/%E5%AE%9E%E6%88%98/">实战</a></div><div class="post-nav"><a class="pre" href="/2026/07/25/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%94%A8AI%E7%BC%96%E7%A8%8B%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E4%B8%89%E4%B8%AA%E6%9C%88%E6%88%90%E9%95%BF%E6%9B%B2%E7%BA%BF/">从零开始用AI编程：一个前端工程师的三个月成长曲线</a><a class="next" href="/2026/03/14/%E6%88%91%E7%94%A8-Flutter-SpringBoot-%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%AA%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2%E5%B7%A5%E5%85%B7%EF%BC%88%E5%9B%BD%E5%86%85%E7%89%88-Vercel%EF%BC%89/">我用 Flutter+SpringBoot 开发了个一键部署工具（国内版 Vercel）</a></div><div id="vcomment"></div><link rel="stylesheet" type="text/css" href="//unpkg.com/@waline/client@v2/dist/waline.css"><script src="//unpkg.com/@waline/client@v2/dist/waline.js"></script><script>const waline = Waline.init({
+  el: '#vcomment',
+  path: decodeURI(location.pathname) || '/',
+  lang: 'zh-cn',
+  serverURL: 'https://vercel-xi-gilt.vercel.app',
+  pageSize:'10'
+});</script></div></div></div><aside class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="search-form"><input class="popup-trigger" placeholder="Search" readonly="readonly"/></div></div><div class="toc-article" id="toc"><div class="toc-title">Categories<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%85%E4%BA%8B%E5%BC%80%E5%A7%8B"><span class="toc-number">1.</span> <span class="toc-text">故事开始</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E5%85%B3%EF%BC%9A%E7%9C%8B%E4%B8%8D%E6%87%82%E4%BB%A3%E7%A0%81"><span class="toc-number">2.</span> <span class="toc-text">第一关：看不懂代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E5%85%B3%EF%BC%9A%E6%94%B9%E4%BA%86%E7%AC%AC%E4%B8%80%E8%A1%8C%E4%BB%A3%E7%A0%81"><span class="toc-number">3.</span> <span class="toc-text">第二关：改了第一行代码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF%E6%80%9D%E7%BB%B4%E7%89%88"><span class="toc-number">3.1.</span> <span class="toc-text">前端思维版</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8E%E7%AB%AF%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.2.</span> <span class="toc-text">后端实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E5%85%B3%EF%BC%9AJOIN%E7%9A%84%E8%A1%80%E6%B3%AA%E6%95%99%E8%AE%AD"><span class="toc-number">4.</span> <span class="toc-text">第三关：JOIN的血泪教训</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF%E6%80%9D%E7%BB%B4%E7%89%88-1"><span class="toc-number">4.1.</span> <span class="toc-text">前端思维版</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E5%90%8E%E7%9A%84%E7%89%88%E6%9C%AC"><span class="toc-number">4.2.</span> <span class="toc-text">优化后的版本</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E5%85%B3%EF%BC%9ASQL%E4%B9%9F%E4%B8%8D%E4%BC%9A%E5%86%99%E4%BA%86"><span class="toc-number">5.</span> <span class="toc-text">第四关：SQL也不会写了</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E5%85%B3%EF%BC%9A%E5%85%B6%E5%AE%9E%E5%B7%B2%E7%BB%8F%E4%BC%9A%E4%BA%86"><span class="toc-number">6.</span> <span class="toc-text">第五关：其实已经会了</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF%E2%86%92%E5%90%8E%E7%AB%AF%E5%AF%B9%E7%85%A7%E8%A1%A8"><span class="toc-number">7.</span> <span class="toc-text">前端→后端对照表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%88%91%E5%AD%A6%E5%88%B0%E7%9A%84%E5%87%A0%E4%BB%B6%E4%BA%8B"><span class="toc-number">8.</span> <span class="toc-text">我学到的几件事</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%85%A8%E6%A0%88%E4%B8%8D%E6%98%AF%E2%80%9D%E4%BB%80%E4%B9%88%E9%83%BD%E4%BC%9A%E2%80%9D%EF%BC%8C%E6%98%AF%E2%80%9D%E9%9C%80%E8%A6%81%E4%BB%80%E4%B9%88%E5%AD%A6%E4%BB%80%E4%B9%88%E2%80%9D"><span class="toc-number">8.1.</span> <span class="toc-text">1. 全栈不是”什么都会”，是”需要什么学什么”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%89%8D%E7%AB%AF%E6%80%9D%E7%BB%B4%E5%9C%A8%E5%90%8E%E7%AB%AF%E4%B9%9F%E9%80%82%E7%94%A8"><span class="toc-number">8.2.</span> <span class="toc-text">2. 前端思维在后端也适用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%9C%80%E5%A4%A7%E7%9A%84%E9%9A%9C%E7%A2%8D%E4%B8%8D%E6%98%AF%E6%8A%80%E6%9C%AF%EF%BC%8C%E6%98%AF%E5%BF%83%E7%90%86"><span class="toc-number">8.3.</span> <span class="toc-text">3. 最大的障碍不是技术，是心理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E7%BB%99%E8%87%AA%E5%B7%B1%E4%B8%89%E4%B8%AA%E6%9C%88"><span class="toc-number">8.4.</span> <span class="toc-text">4. 给自己三个月</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="toc-number">9.</span> <span class="toc-text">写在最后</span></a></li></ol></div></div></div></aside><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2026 <a href="/." rel="nofollow">David's blog.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv"><i class="fa fa-eye" aria-hidden="true"></i> <span id="busuanzi_value_site_pv"></span> times</span></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="/js/search.js?v=0.0.0"></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+   search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script type="text/javascript" src="/js/underscore-min.js"></script><script type="text/javascript" src="/js/inView.js"></script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
