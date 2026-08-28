@@ -1,0 +1,131 @@
+<!DOCTYPE html><html lang="en"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="A front end siege division built ~"><title>二手回收行业为什么需要AI Agent——从一条订单链路说起 | David's blog</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="/js/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = 'https://hm.baidu.com/hm.js?' + 'b5b30c3f05f1d88ff91cf0f233b1fa32';
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+
+<!-- GrowingIO Analytics code version 2.1 -->
+<!-- Copyright 2015-2018 GrowingIO, Inc. More info available at http://www.growingio.com -->
+!function(e,t,n,g,i){e[i]=e[i]||function(){(e[i].q=e[i].q||[]).push(arguments)},n=t.createElement("script"),tag=t.getElementsByTagName("script")[0],n.async=1,n.src=('https:'==document.location.protocol?'https://':'http://')+g,tag.parentNode.insertBefore(n,tag)}(window,document,"script","assets.giocdn.com/2.1/gio.js","gio");
+  gio('init','9a2bc3f2970e279e', {});
+
+//custom page code begin here
+
+//custom page code end here
+
+gio('send');</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">二手回收行业为什么需要AI Agent——从一条订单链路说起</h1><a id="logo" href="/.">David's blog</a><p class="description">Welcome to my den</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> Home</i></a><a href="/archives/"><i class="fa fa-archive"> Archive</i></a><a href="/about/"><i class="fa fa-user"> About</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">二手回收行业为什么需要AI Agent——从一条订单链路说起</h1><div class="post-meta">Aug 28, 2026<span> | </span><span class="category"><a href="/categories/%E4%BA%A7%E4%B8%9A%E5%88%86%E6%9E%90/">产业分析</a></span><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span></div><a class="disqus-comment-count" href="/2026/08/28/%E4%BA%8C%E6%89%8B%E5%9B%9E%E6%94%B6%E8%A1%8C%E4%B8%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81AI%20Agent/#vcomment"> </a><div class="post-content"><blockquote>
+<p>上一篇聊了循环产业的宏观趋势，这篇聊点具体的：一条真实的回收订单，从用户点击”提交估价”到最终打款，中间到底经历了什么？这条链路上，AI Agent 能在哪些环节创造真实价值？</p>
+</blockquote>
+<span id="more"></span>
+<h2 id="一条订单的完整链路"><a href="#一条订单的完整链路" class="headerlink" title="一条订单的完整链路"></a>一条订单的完整链路</h2><p>一个用户在 H5 页面提交回收订单，看起来就是一个表单提交。但请求从前端到数据库，要走的路比大多数人想象的长得多：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">用户点击<span class="string">&quot;提交估价&quot;</span></span><br><span class="line">  → 前端表单校验（机型、容量、屏幕状况、功能状态）</span><br><span class="line">  → POST 请求到网关</span><br><span class="line">  → 网关按服务名路由到回收服务</span><br><span class="line">  → Controller 接收请求，校验 DTO</span><br><span class="line">  →<span class="built_in"> Service </span>层：创建订单、写入设备报告、记录机型信息、</span><br><span class="line">    生成操作日志、保存用户收款信息和地址</span><br><span class="line">  → 调用顺丰下单接口（物流）</span><br><span class="line">  → 事务提交，返回订单号</span><br></pre></td></tr></table></figure>
+<p>这还只是”创建订单”这一个动作。完整的回收链路是这样的：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">估价 → 创建订单 → 用户寄出 → 物流签收 → 质检 → </span><br><span class="line">议价（可能需要）→ 确认价格 → 打款 → 入库</span><br></pre></td></tr></table></figure>
+<p>每一个环节都有自己的业务规则、异常分支和状态流转。一个订单从创建到打款，中间可能经历十几次状态变更，每一次变更都可能触发不同的业务逻辑。</p>
+<p>这就是二手回收行业的真实复杂度。不是”一个电商订单”能概括的。</p>
+<hr>
+<h2 id="这条链路上藏着哪些痛点"><a href="#这条链路上藏着哪些痛点" class="headerlink" title="这条链路上藏着哪些痛点"></a>这条链路上藏着哪些痛点</h2><h3 id="痛点一：估价——规则引擎覆盖不了的灰色地带"><a href="#痛点一：估价——规则引擎覆盖不了的灰色地带" class="headerlink" title="痛点一：估价——规则引擎覆盖不了的灰色地带"></a>痛点一：估价——规则引擎覆盖不了的灰色地带</h3><p>估价系统通常基于规则：机型 × 成色 × 功能状态 = 价格。大部分情况没问题，但边界 case 永远存在：</p>
+<ul>
+<li>屏幕有划痕 + 摄像头也有问题，怎么折价？</li>
+<li>电池健康度 78%，但用户刚换了第三方电池，怎么算？</li>
+<li>这个型号上周行情涨了 15%，规则引擎还没更新，报不报？</li>
+</ul>
+<p>规则引擎处理 80% 的场景没问题。剩下 20% 的边界 case，要么靠人工审核（慢），要么报一个保守价格（用户体验差），要么报一个激进价格（亏钱）。</p>
+<h3 id="痛点二：质检——非标品的标准化之难"><a href="#痛点二：质检——非标品的标准化之难" class="headerlink" title="痛点二：质检——非标品的标准化之难"></a>痛点二：质检——非标品的标准化之难</h3><p>二手手机是典型的非标品。同一型号、同一”成色等级”的两台手机，实际状况可能差很远。</p>
+<p>质检员需要判断：屏幕划痕深度、边框磕碰程度、功能是否正常、是否拆修过……这些判断高度依赖经验。一个资深质检员和一个新手质检员，对同一台手机的估价可能差 20%。</p>
+<p>更麻烦的是”用户自报”和”实际状况”的差异。用户说”屏幕完好”，实际有一道细微划痕——这不是用户故意骗你，而是每个人对”完好”的定义不一样。</p>
+<h3 id="痛点三：议价——需要”谈商”的环节"><a href="#痛点三：议价——需要”谈商”的环节" class="headerlink" title="痛点三：议价——需要”谈商”的环节"></a>痛点三：议价——需要”谈商”的环节</h3><p>质检结果和用户自报不一致时，需要和用户沟通调价。这不是发一条短信就能解决的：</p>
+<ul>
+<li>怎么措辞让用户接受降价？</li>
+<li>用户不同意怎么办？加一点还是退回？</li>
+<li>高价值用户要不要给更好的价格留客？</li>
+</ul>
+<p>优秀的议价人员能平衡成本和用户体验。但这个能力很难标准化，也很难规模化。</p>
+<h3 id="痛点四：异常处理——链路越长，意外越多"><a href="#痛点四：异常处理——链路越长，意外越多" class="headerlink" title="痛点四：异常处理——链路越长，意外越多"></a>痛点四：异常处理——链路越长，意外越多</h3><p>回到开头那条订单链路。有一个真实场景：</p>
+<blockquote>
+<p>用户在 H5 提交订单，前端请求到网关，网关路由到回收服务，Service 开始创建订单、写入设备报告、记录日志……同时调用顺丰接口下单。</p>
+<p>如果顺丰下单成功了，但本地数据库事务回滚了——怎么办？</p>
+</blockquote>
+<p>这种”外部调用成功但本地事务失败”的场景，在分布式系统里很常见。但大多数系统的处理方式是：记录日志，等人工处理。</p>
+<p>类似的异常还有：</p>
+<ul>
+<li>物流签收了，但质检排队排了三天，用户来催</li>
+<li>用户同意了调价，但打款时账户信息有误</li>
+<li>入库后发现质检漏检了一个问题，需要追溯</li>
+</ul>
+<p>这些异常不是”异常情况”，而是日常运营的一部分。但处理成本很高。</p>
+<hr>
+<h2 id="为什么现有的解决方案不够"><a href="#为什么现有的解决方案不够" class="headerlink" title="为什么现有的解决方案不够"></a>为什么现有的解决方案不够</h2><p>你可能要说：这些问题，头部平台不都有解决方案了吗？</p>
+<p>确实有。但大多是”工具”，不是”Agent”。</p>
+<p><strong>工具</strong>是什么意思？</p>
+<ul>
+<li>AI 质检工具：拍照 → 识别外观 → 输出报告。但不知道这台手机的估价逻辑，不知道质检结果怎么影响后续议价。</li>
+<li>定价算法：输入成色和行情 → 输出价格。但不知道质检报告的细节，不知道用户的议价历史。</li>
+<li>自动化工单：状态变更 → 触发预设规则。但规则是写死的，遇到没预设的情况就停。</li>
+</ul>
+<p>工具能做好单点任务。但二手回收是一个<strong>端到端的链路</strong>——估价影响质检，质检影响定价，定价影响议价，议价影响打款。一个环节的决策会影响后续所有环节。</p>
+<p>我们需要的是一个能<strong>理解整个业务上下文</strong>的 Agent，而不是一堆互不关联的工具。</p>
+<hr>
+<h2 id="AI-Agent-能做什么不一样的事"><a href="#AI-Agent-能做什么不一样的事" class="headerlink" title="AI Agent 能做什么不一样的事"></a>AI Agent 能做什么不一样的事</h2><h3 id="场景一：智能估价-质检预判"><a href="#场景一：智能估价-质检预判" class="headerlink" title="场景一：智能估价 + 质检预判"></a>场景一：智能估价 + 质检预判</h3><p>用户拍照提交估价时，Agent 不只是跑规则引擎，而是：</p>
+<ol>
+<li>通过视觉模型识别实际外观状况</li>
+<li>与用户自报信息对比，预判可能的差异</li>
+<li>结合近期该型号的成交数据，给出更精准的估价区间</li>
+<li>在估价阶段就标注”哪些地方质检时可能需要重点检查”</li>
+</ol>
+<p>这样质检员拿到设备时，已经知道该重点看哪里。不是质检完了再调价，而是从估价开始就在为质检做准备。</p>
+<h3 id="场景二：议价话术生成-策略推荐"><a href="#场景二：议价话术生成-策略推荐" class="headerlink" title="场景二：议价话术生成 + 策略推荐"></a>场景二：议价话术生成 + 策略推荐</h3><p>质检结果出来后，Agent 不只是生成一个差价数字，而是：</p>
+<ol>
+<li>根据差异项生成自然的沟通话术（”您的手机边框有两处磕碰，这会影响二次销售，我们需要下调 XX 元”）</li>
+<li>根据用户历史行为推荐策略（这个用户上次爽快接受了调价，可以先报低点；那个用户很敏感，最好一步到位）</li>
+<li>实时调整议价方案（用户不同意时，是加 50 元还是送个贴膜券，哪个成本更低、成功率更高）</li>
+</ol>
+<h3 id="场景三：异常自动处理"><a href="#场景三：异常自动处理" class="headerlink" title="场景三：异常自动处理"></a>场景三：异常自动处理</h3><p>回到那个”顺丰下单成功但本地事务回滚”的场景。</p>
+<p>传统做法：记日志，等运维发现，手动处理。</p>
+<p>Agent 做法：</p>
+<ol>
+<li>检测到外部调用成功但本地失败</li>
+<li>理解当前状态：顺丰已经有运单了，但本地没有订单</li>
+<li>自动决策：是补偿创建本地订单，还是取消顺丰运单</li>
+<li>执行补偿，并通知相关人员确认</li>
+</ol>
+<p>这不是假设——这些场景在真实运营中每天都在发生。区别在于，现在是靠人处理，以后可以靠 Agent 处理。</p>
+<hr>
+<h2 id="MVP-怎么做"><a href="#MVP-怎么做" class="headerlink" title="MVP 怎么做"></a>MVP 怎么做</h2><p>如果你也想在这个方向尝试，我的建议是：</p>
+<p><strong>第一步：从”AI 拍照检测”切入。</strong></p>
+<p>不需要做一个完整的 Agent。先做一个工具：用户拍几张照片 → 视觉模型识别外观 → 生成检测报告 → 给出建议价格。</p>
+<p>技术上，这完全可以用现有的视觉大模型 API + 行业 prompt 实现。不需要自己训练模型。</p>
+<p>关键是 <strong>prompt 里要包含行业知识</strong>：什么程度的划痕算”轻微”、什么程度的磕碰算”明显”、什么情况直接判定为”不合格”——这些不是调 API 就能搞定的，需要对业务有深入理解。</p>
+<p><strong>第二步：找 3-5 家中小回收商免费试用。</strong></p>
+<p>不要找头部平台——他们的系统太重，接入成本太高。找中小回收商，他们痛点最大，决策最快。</p>
+<p><strong>验证标准不是”AI 准确率有多高”，而是：</strong></p>
+<ol>
+<li>质检员愿不愿意用？（如果质检员觉得不好用，再准也没用）</li>
+<li>是否真的节省了时间？（省时间 = 省成本）</li>
+<li>生成的报告，买家认不认？（报告是最终交付物，买家不认就白做）</li>
+</ol>
+<hr>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>二手回收行业的核心挑战是<strong>非标品的标准化管理</strong>。从估价到质检到定价到议价，每个环节都在做”把非标品转化为标准商品”的努力。</p>
+<p>传统的做法是：规则引擎 + 人工审核。能跑，但效率低、依赖经验、难以规模化。</p>
+<p>AI Agent 的价值不在于”替代人”，而在于<strong>让机器理解业务上下文</strong>，在规则引擎处理不了的灰色地带做出合理判断，在异常发生时自动补偿，在议价时提供有温度的沟通。</p>
+<p>这个行业已经有了一些 AI 能力——图像识别做质检、算法做定价——但大多是点状的工具，缺少端到端的 Agent 串联。</p>
+<p><strong>谁能把这些点串成线，谁就能在这个千亿市场里占据一个独特的位置。</strong></p>
+<p>这不是算法能力的问题，而是对业务的理解深度的问题。</p>
+<hr>
+<p><em>本文是”二手消费电子循环产业”系列的第二篇。第一篇：<a href="/2026/06/15/中国二手手机回收行业-一个被低估的AI落地富矿/">中国二手手机回收行业：一个被低估的AI落地富矿</a>。后续会继续从技术视角拆解这个行业的机会。</em></p>
+</div><iframe src="/donate/?AliPayQR=/img/alipay.jpeg&amp;WeChatQR=null&amp;GitHub=https://github.com/DavidYuanX&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=null" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div class="tags"><a href="/tags/AI/">AI</a><a href="/tags/%E4%BA%A7%E4%B8%9A%E5%88%86%E6%9E%90/">产业分析</a><a href="/tags/Agent/">Agent</a><a href="/tags/%E4%BA%8C%E6%89%8B%E5%9B%9E%E6%94%B6/">二手回收</a><a href="/tags/%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/">技术架构</a></div><div class="post-nav"><a class="next" href="/2026/07/25/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%94%A8AI%E7%BC%96%E7%A8%8B%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E4%B8%89%E4%B8%AA%E6%9C%88%E6%88%90%E9%95%BF%E6%9B%B2%E7%BA%BF/">从零开始用AI编程：一个前端工程师的三个月成长曲线</a></div><div id="vcomment"></div><link rel="stylesheet" type="text/css" href="//unpkg.com/@waline/client@v2/dist/waline.css"><script src="//unpkg.com/@waline/client@v2/dist/waline.js"></script><script>const waline = Waline.init({
+  el: '#vcomment',
+  path: decodeURI(location.pathname) || '/',
+  lang: 'zh-cn',
+  serverURL: 'https://vercel-xi-gilt.vercel.app',
+  pageSize:'10'
+});</script></div></div></div><aside class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="search-form"><input class="popup-trigger" placeholder="Search" readonly="readonly"/></div></div><div class="toc-article" id="toc"><div class="toc-title">Categories<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E6%9D%A1%E8%AE%A2%E5%8D%95%E7%9A%84%E5%AE%8C%E6%95%B4%E9%93%BE%E8%B7%AF"><span class="toc-number">1.</span> <span class="toc-text">一条订单的完整链路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%99%E6%9D%A1%E9%93%BE%E8%B7%AF%E4%B8%8A%E8%97%8F%E7%9D%80%E5%93%AA%E4%BA%9B%E7%97%9B%E7%82%B9"><span class="toc-number">2.</span> <span class="toc-text">这条链路上藏着哪些痛点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%97%9B%E7%82%B9%E4%B8%80%EF%BC%9A%E4%BC%B0%E4%BB%B7%E2%80%94%E2%80%94%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E8%A6%86%E7%9B%96%E4%B8%8D%E4%BA%86%E7%9A%84%E7%81%B0%E8%89%B2%E5%9C%B0%E5%B8%A6"><span class="toc-number">2.1.</span> <span class="toc-text">痛点一：估价——规则引擎覆盖不了的灰色地带</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%97%9B%E7%82%B9%E4%BA%8C%EF%BC%9A%E8%B4%A8%E6%A3%80%E2%80%94%E2%80%94%E9%9D%9E%E6%A0%87%E5%93%81%E7%9A%84%E6%A0%87%E5%87%86%E5%8C%96%E4%B9%8B%E9%9A%BE"><span class="toc-number">2.2.</span> <span class="toc-text">痛点二：质检——非标品的标准化之难</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%97%9B%E7%82%B9%E4%B8%89%EF%BC%9A%E8%AE%AE%E4%BB%B7%E2%80%94%E2%80%94%E9%9C%80%E8%A6%81%E2%80%9D%E8%B0%88%E5%95%86%E2%80%9D%E7%9A%84%E7%8E%AF%E8%8A%82"><span class="toc-number">2.3.</span> <span class="toc-text">痛点三：议价——需要”谈商”的环节</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%97%9B%E7%82%B9%E5%9B%9B%EF%BC%9A%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E2%80%94%E2%80%94%E9%93%BE%E8%B7%AF%E8%B6%8A%E9%95%BF%EF%BC%8C%E6%84%8F%E5%A4%96%E8%B6%8A%E5%A4%9A"><span class="toc-number">2.4.</span> <span class="toc-text">痛点四：异常处理——链路越长，意外越多</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E7%8E%B0%E6%9C%89%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%B8%8D%E5%A4%9F"><span class="toc-number">3.</span> <span class="toc-text">为什么现有的解决方案不够</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AI-Agent-%E8%83%BD%E5%81%9A%E4%BB%80%E4%B9%88%E4%B8%8D%E4%B8%80%E6%A0%B7%E7%9A%84%E4%BA%8B"><span class="toc-number">4.</span> <span class="toc-text">AI Agent 能做什么不一样的事</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF%E4%B8%80%EF%BC%9A%E6%99%BA%E8%83%BD%E4%BC%B0%E4%BB%B7-%E8%B4%A8%E6%A3%80%E9%A2%84%E5%88%A4"><span class="toc-number">4.1.</span> <span class="toc-text">场景一：智能估价 + 质检预判</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF%E4%BA%8C%EF%BC%9A%E8%AE%AE%E4%BB%B7%E8%AF%9D%E6%9C%AF%E7%94%9F%E6%88%90-%E7%AD%96%E7%95%A5%E6%8E%A8%E8%8D%90"><span class="toc-number">4.2.</span> <span class="toc-text">场景二：议价话术生成 + 策略推荐</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF%E4%B8%89%EF%BC%9A%E5%BC%82%E5%B8%B8%E8%87%AA%E5%8A%A8%E5%A4%84%E7%90%86"><span class="toc-number">4.3.</span> <span class="toc-text">场景三：异常自动处理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MVP-%E6%80%8E%E4%B9%88%E5%81%9A"><span class="toc-number">5.</span> <span class="toc-text">MVP 怎么做</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-number">6.</span> <span class="toc-text">结论</span></a></li></ol></div></div></div></aside><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2026 <a href="/." rel="nofollow">David's blog.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv"><i class="fa fa-eye" aria-hidden="true"></i> <span id="busuanzi_value_site_pv"></span> times</span></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="/js/search.js?v=0.0.0"></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+   search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script type="text/javascript" src="/js/underscore-min.js"></script><script type="text/javascript" src="/js/inView.js"></script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
