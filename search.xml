@@ -22,13 +22,13 @@
             
             <tag> AI </tag>
             
-            <tag> 产业分析 </tag>
-            
             <tag> Agent </tag>
             
             <tag> 二手回收 </tag>
             
             <tag> 技术架构 </tag>
+            
+            <tag> 产业分析 </tag>
             
         </tags>
       
@@ -144,11 +144,11 @@
             
             <tag> AI </tag>
             
+            <tag> 产业分析 </tag>
+            
             <tag> 二手手机 </tag>
             
             <tag> 回收行业 </tag>
-            
-            <tag> 产业分析 </tag>
             
         </tags>
       
@@ -228,35 +228,6 @@
         <tags>
             
             <tag> 估价，定价，算法，二手手机 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>我用 Flutter+SpringBoot 开发了一键部署工具</title>
-      <link href="/2026/03/14/%E6%88%91%E7%94%A8%20Flutter+SpringBoot%20%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2%E5%B7%A5%E5%85%B7/"/>
-      <url>/2026/03/14/%E6%88%91%E7%94%A8%20Flutter+SpringBoot%20%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2%E5%B7%A5%E5%85%B7/</url>
-      
-        <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>记录我用 Flutter + SpringBoot 开发一键部署工具的过程，实现类似 Vercel 的国内版部署体验。</p><hr><h2 id="为什么做这个？"><a href="#为什么做这个？" class="headerlink" title="为什么做这个？"></a>为什么做这个？</h2><p>部署一个全栈项目太麻烦了：</p><ul><li>前端要构建、上传、配置 CDN</li><li>后端要打包、推镜像、配置 K8s</li><li>数据库要迁移、备份、监控</li></ul><p><strong>Vercel 很好，但只支持前端。国内访问还慢。</strong></p><p>所以我想做一个：<strong>前端+后端+数据库，一键部署，国内访问快。</strong></p><hr><h2 id="核心功能"><a href="#核心功能" class="headerlink" title="核心功能"></a>核心功能</h2><h3 id="1-一键部署"><a href="#1-一键部署" class="headerlink" title="1. 一键部署"></a>1. 一键部署</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deploy-cli push</span><br></pre></td></tr></table></figure><p>就这一条命令，自动完成：</p><ul><li>检测项目类型（Flutter/Spring Boot/Node.js）</li><li>构建项目</li><li>创建 Docker 镜像</li><li>推送到镜像仓库</li><li>部署到云服务器</li><li>配置域名和 HTTPS</li></ul><h3 id="2-多环境支持"><a href="#2-多环境支持" class="headerlink" title="2. 多环境支持"></a>2. 多环境支持</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># deploy.yaml</span></span><br><span class="line"><span class="attr">environments:</span></span><br><span class="line">  <span class="attr">dev:</span></span><br><span class="line">    <span class="attr">replicas:</span> <span class="number">1</span></span><br><span class="line">    <span class="attr">resources:</span></span><br><span class="line">      <span class="attr">cpu:</span> <span class="number">0.5</span></span><br><span class="line">      <span class="attr">memory:</span> <span class="string">512Mi</span></span><br><span class="line">  <span class="attr">prod:</span></span><br><span class="line">    <span class="attr">replicas:</span> <span class="number">3</span></span><br><span class="line">    <span class="attr">resources:</span></span><br><span class="line">      <span class="attr">cpu:</span> <span class="number">2</span></span><br><span class="line">      <span class="attr">memory:</span> <span class="string">2Gi</span></span><br></pre></td></tr></table></figure><h3 id="3-自动扩缩容"><a href="#3-自动扩缩容" class="headerlink" title="3. 自动扩缩容"></a>3. 自动扩缩容</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">scaling:</span></span><br><span class="line">  <span class="attr">minReplicas:</span> <span class="number">1</span></span><br><span class="line">  <span class="attr">maxReplicas:</span> <span class="number">10</span></span><br><span class="line">  <span class="attr">targetCPU:</span> <span class="number">70</span></span><br></pre></td></tr></table></figure><hr><h2 id="技术架构"><a href="#技术架构" class="headerlink" title="技术架构"></a>技术架构</h2><h3 id="客户端（Flutter）"><a href="#客户端（Flutter）" class="headerlink" title="客户端（Flutter）"></a>客户端（Flutter）</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DeployService</span> </span>&#123;</span><br><span class="line">  Future&lt;DeployResult&gt; deploy(DeployConfig config) <span class="keyword">async</span> &#123;</span><br><span class="line">    <span class="comment">// 1. 构建项目</span></span><br><span class="line">    <span class="keyword">await</span> buildProject(config);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 2. 创建镜像</span></span><br><span class="line">    <span class="keyword">await</span> createImage(config);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 3. 推送镜像</span></span><br><span class="line">    <span class="keyword">await</span> pushImage(config);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 4. 部署到集群</span></span><br><span class="line">    <span class="keyword">await</span> deployToCluster(config);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 5. 配置域名</span></span><br><span class="line">    <span class="keyword">await</span> setupDomain(config);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> DeployResult.success();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="服务端（Spring-Boot）"><a href="#服务端（Spring-Boot）" class="headerlink" title="服务端（Spring Boot）"></a>服务端（Spring Boot）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DeployService</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> DeployResult <span class="title function_">deploy</span><span class="params">(DeployRequest request)</span> &#123;</span><br><span class="line">        <span class="comment">// 1. 验证配置</span></span><br><span class="line">        validateConfig(request);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 2. 调用 K8s API</span></span><br><span class="line">        k8sClient.deploy(request.getDeployment());</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 3. 配置 Ingress</span></span><br><span class="line">        k8sClient.setupIngress(request.getDomain());</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 4. 返回结果</span></span><br><span class="line">        <span class="keyword">return</span> DeployResult.success();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><hr><h2 id="部署流程"><a href="#部署流程" class="headerlink" title="部署流程"></a>部署流程</h2><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">用户点击<span class="string">&quot;部署&quot;</span></span><br><span class="line">    │</span><br><span class="line">    ▼</span><br><span class="line">┌──────────────────┐</span><br><span class="line">│ 检测项目类型     │</span><br><span class="line">└─────────────────┘</span><br><span class="line">         │</span><br><span class="line">         ▼</span><br><span class="line">┌──────────────────┐</span><br><span class="line">│ 执行构建脚本     │</span><br><span class="line">│ (flutter <span class="keyword">build) </span> │</span><br><span class="line">└────────┬─────────┘</span><br><span class="line">         │</span><br><span class="line">         ▼</span><br><span class="line">──────────────────┐</span><br><span class="line">│ 创建 Docker 镜像 │</span><br><span class="line">└────────┬─────────</span><br><span class="line">         │</span><br><span class="line">         ▼</span><br><span class="line">┌──────────────────┐</span><br><span class="line">│ 推送到镜像仓库   │</span><br><span class="line">└────────┬─────────┘</span><br><span class="line">         │</span><br><span class="line">         ▼</span><br><span class="line">┌──────────────────</span><br><span class="line">│ 部署到 K8s 集群  │</span><br><span class="line">└────────┬─────────┘</span><br><span class="line">         │</span><br><span class="line">         ▼</span><br><span class="line">┌──────────────────┐</span><br><span class="line">│ 配置域名+HTTPS   │</span><br><span class="line">└────────┬─────────┘</span><br><span class="line">         │</span><br><span class="line">         ▼</span><br><span class="line">    部署完成！</span><br></pre></td></tr></table></figure><hr><h2 id="与-Vercel-的对比"><a href="#与-Vercel-的对比" class="headerlink" title="与 Vercel 的对比"></a>与 Vercel 的对比</h2><table><thead><tr><th>功能</th><th>Vercel</th><th>我的工具</th></tr></thead><tbody><tr><td>前端部署</td><td>✅</td><td>✅</td></tr><tr><td>后端部署</td><td></td><td>✅</td></tr><tr><td>数据库</td><td>❌</td><td>✅</td></tr><tr><td>国内访问</td><td>慢</td><td>快</td></tr><tr><td>价格</td><td>免费额度少</td><td>按需付费</td></tr></tbody></table><hr><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><strong>做国内版 Vercel，但支持全栈部署。</strong></p><p>让开发者专注于写代码，部署的事交给工具。</p><hr><p><em>记录我用 Flutter + SpringBoot 开发一键部署工具的过程，实现类似 Vercel 的国内版部署体验。</em></p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 个人项目 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Flutter </tag>
-            
-            <tag> SpringBoot </tag>
-            
-            <tag> 部署，Vercel </tag>
             
         </tags>
       
