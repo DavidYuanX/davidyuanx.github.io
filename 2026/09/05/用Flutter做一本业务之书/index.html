@@ -1,0 +1,225 @@
+<!DOCTYPE html><html lang="en"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="A front end siege division built ~"><title>用 Flutter 做一本&quot;业务之书&quot;：把二手手机行业理解沉淀成可阅读的产品 | David's blog</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="/js/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = 'https://hm.baidu.com/hm.js?' + 'b5b30c3f05f1d88ff91cf0f233b1fa32';
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+
+<!-- GrowingIO Analytics code version 2.1 -->
+<!-- Copyright 2015-2018 GrowingIO, Inc. More info available at http://www.growingio.com -->
+!function(e,t,n,g,i){e[i]=e[i]||function(){(e[i].q=e[i].q||[]).push(arguments)},n=t.createElement("script"),tag=t.getElementsByTagName("script")[0],n.async=1,n.src=('https:'==document.location.protocol?'https://':'http://')+g,tag.parentNode.insertBefore(n,tag)}(window,document,"script","assets.giocdn.com/2.1/gio.js","gio");
+  gio('init','9a2bc3f2970e279e', {});
+
+//custom page code begin here
+
+//custom page code end here
+
+gio('send');</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">用 Flutter 做一本&quot;业务之书&quot;：把二手手机行业理解沉淀成可阅读的产品</h1><a id="logo" href="/.">David's blog</a><p class="description">Welcome to my den</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> Home</i></a><a href="/archives/"><i class="fa fa-archive"> Archive</i></a><a href="/about/"><i class="fa fa-user"> About</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">用 Flutter 做一本&quot;业务之书&quot;：把二手手机行业理解沉淀成可阅读的产品</h1><div class="post-meta">Sep 5, 2026<span> | </span><span class="category"><a href="/categories/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/">技术随笔</a></span><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span></div><a class="disqus-comment-count" href="/2026/09/05/%E7%94%A8Flutter%E5%81%9A%E4%B8%80%E6%9C%AC%E4%B8%9A%E5%8A%A1%E4%B9%8B%E4%B9%A6/#vcomment"> </a><div class="post-content"><blockquote>
+<p>当一个行业足够复杂，最好的知识沉淀方式不是堆文档，而是写一本书。</p>
+</blockquote>
+<h2 id="引言：从资料堆到业务之书"><a href="#引言：从资料堆到业务之书" class="headerlink" title="引言：从资料堆到业务之书"></a>引言：从资料堆到业务之书</h2><p>做业务分析久了，总会遇到一个问题：<strong>分析成果怎么沉淀？</strong></p>
+<p>Excel 表格、流程图、接口文档、源码分析报告……资料越来越多，但真正能让人理解业务的却很少。新同事入职，面对几十份文档，不知道从何看起；老员工离职，带走的是脑子里的业务理解，留下的是散落在各处的碎片。</p>
+<p>我在做二手手机回收业务分析时，也遇到了这个问题。分析了一百多个业务节点，梳理了几十万字的源码证据，但始终觉得缺点什么——<strong>缺一个能让业务理解”活”起来的载体</strong>。</p>
+<p>于是，我做了一个尝试：用 Flutter 写了一个桌面应用，把业务分析成果做成了一本可以阅读的”业务之书”。</p>
+<p>这个项目从 8 月开始构思，9 月初基本完成。现在写这篇博客，是对这个项目的回顾和总结。</p>
+<h2 id="核心理念：像书一样阅读业务"><a href="#核心理念：像书一样阅读业务" class="headerlink" title="核心理念：像书一样阅读业务"></a>核心理念：像书一样阅读业务</h2><h3 id="1-不是资料检索，是阅读路径"><a href="#1-不是资料检索，是阅读路径" class="headerlink" title="1. 不是资料检索，是阅读路径"></a>1. 不是资料检索，是阅读路径</h3><p>传统知识库的思路是”搜索”：输入关键词，返回相关文档。但业务理解不是这样工作的。</p>
+<p>当你想理解”估价线索”这个业务节点时，你不只是想看到一篇文档，你想知道：</p>
+<ul>
+<li>它在整个回收链路中的位置</li>
+<li>它解决什么问题</li>
+<li>谁参与、对象是什么、状态怎么流转</li>
+<li>它和上下游的关系</li>
+</ul>
+<p>这些问题，不是一篇文档能回答的，而是一本书的章节结构才能说清楚。</p>
+<p>所以”业务之书”的主阅读路径是：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">左侧目录 → 业务节点 → 节点下文章 → 右侧正文</span><br></pre></td></tr></table></figure>
+<p>资料检索只做辅助，不作为主要阅读入口。</p>
+<h3 id="2-节点名-业务大纲"><a href="#2-节点名-业务大纲" class="headerlink" title="2. 节点名 = 业务大纲"></a>2. 节点名 = 业务大纲</h3><p>传统文档分类喜欢用”用户模块””订单模块”这种技术视角。但业务之书不同，它的节点名直接表达业务链路中的位置：</p>
+<ul>
+<li>R-01 估价线索</li>
+<li>R-02 创建回收订单</li>
+<li>R-03 流程配置分流</li>
+<li>R-04 回收报价定价</li>
+<li>R-05 确认议价退回</li>
+<li>R-06 履约收货</li>
+<li>R-07 检测质检</li>
+<li>R-08 打款结算</li>
+<li>R-09 入库转销售</li>
+</ul>
+<p>看到这些节点名，你就知道一笔回收交易是怎么一步步走完的。这不是文档分类，这是业务地图。</p>
+<h3 id="3-业务与技术分层"><a href="#3-业务与技术分层" class="headerlink" title="3. 业务与技术分层"></a>3. 业务与技术分层</h3><p>这是”业务之书”最重要的设计之一。</p>
+<p>每篇文章都有对应的”技术证据”，但技术证据不参与主阅读流。正文用业务语言讲运作：角色、对象、动作、状态、钱流、货流、库存、售后、清结算。技术证据放在底层，记录源码入口、接口、表名、字段、状态枚举，用来校准业务结论。</p>
+<p>这样做的好处是：</p>
+<ul>
+<li><strong>业务人员</strong>可以只看正文，理解业务运作</li>
+<li><strong>技术人员</strong>可以深入证据层，核对实现细节</li>
+<li><strong>新人</strong>可以先读正文建立全局观，再按需深入</li>
+</ul>
+<p>正文和技术证据的关系，就像地图和卫星图：地图告诉你路怎么走，卫星图告诉你地形是什么样的。</p>
+<h3 id="4-去品牌化，沉淀行业理解"><a href="#4-去品牌化，沉淀行业理解" class="headerlink" title="4. 去品牌化，沉淀行业理解"></a>4. 去品牌化，沉淀行业理解</h3><p>分析时尽量避开具体公司名，把内容沉淀成对二手手机行业的业务理解。品牌名只作为证据来源、历史材料或对标案例出现。</p>
+<p>这样做有两个好处：</p>
+<ul>
+<li>内容可以跨公司复用，不绑定特定业务</li>
+<li>思考的是”行业应该怎么做”，而不是”某公司怎么做的”</li>
+</ul>
+<h2 id="内容结构：23-个节点，构建完整业务地图"><a href="#内容结构：23-个节点，构建完整业务地图" class="headerlink" title="内容结构：23 个节点，构建完整业务地图"></a>内容结构：23 个节点，构建完整业务地图</h2><p>“业务之书”当前包含 8 个业务分类，23 个核心节点：</p>
+<h3 id="上篇：国内回收业务"><a href="#上篇：国内回收业务" class="headerlink" title="上篇：国内回收业务"></a>上篇：国内回收业务</h3><p>回收业务是最核心的业务线，包含 9 个节点：</p>
+<ol>
+<li><strong>估价线索</strong>：用户正式卖机前，平台如何把一次询价行为沉淀成可转化的线索</li>
+<li><strong>创建回收订单</strong>：从线索到订单，用户做出卖机决定的那一刻</li>
+<li><strong>流程配置分流</strong>：不同机型、渠道、成色如何走不同的回收流程</li>
+<li><strong>回收报价定价</strong>：估价价如何产生，如何随市场波动</li>
+<li><strong>确认议价退回</strong>：用户对报价不满意时，如何议价或退回</li>
+<li><strong>履约收货</strong>：用户寄出机器后，平台如何收货、验货</li>
+<li><strong>检测质检</strong>：收货后如何检测，检测结果如何影响价格</li>
+<li><strong>打款结算</strong>：检测完成后，如何给用户打款</li>
+<li><strong>入库转销售</strong>：回收的机器如何进入销售环节</li>
+</ol>
+<h3 id="下篇：国内销售业务"><a href="#下篇：国内销售业务" class="headerlink" title="下篇：国内销售业务"></a>下篇：国内销售业务</h3><p>销售业务同样包含 9 个节点：</p>
+<ol>
+<li><strong>回收入库</strong>：回收机器进入库存</li>
+<li><strong>库存商品化</strong>：库存机器如何变成可售商品</li>
+<li><strong>上架销售</strong>：商品如何上架到各销售渠道</li>
+<li><strong>门店商城成交</strong>：用户在门店或商城下单购买</li>
+<li><strong>买家报价竞价</strong>：B2B 场景下，买家如何报价竞拍</li>
+<li><strong>标准销售出库</strong>：订单确认后如何出库发货</li>
+<li><strong>买家收货履约</strong>：买家收到机器后的确认流程</li>
+<li><strong>销售售后退换</strong>：售后问题如何处理</li>
+<li><strong>销售清结算</strong>：销售款项如何清算</li>
+</ol>
+<h3 id="附篇：支撑能力"><a href="#附篇：支撑能力" class="headerlink" title="附篇：支撑能力"></a>附篇：支撑能力</h3><p>除了回收和销售两条主线，还有 5 个支撑节点：</p>
+<ol>
+<li><strong>定价报价</strong>：定价策略和报价算法</li>
+<li><strong>运营增长</strong>：用户增长和运营策略</li>
+<li><strong>技术架构</strong>：系统架构和技术选型</li>
+<li><strong>海外与硬件</strong>：海外业务和硬件检测</li>
+<li><strong>行业策略</strong>：行业趋势和商业模式</li>
+</ol>
+<p>每个节点都包含两篇文章：</p>
+<ul>
+<li><strong>业务模型</strong>：讲业务运作，用连续段落叙述</li>
+<li><strong>技术证据</strong>：讲结论依据，记录源码和数据库证据</li>
+</ul>
+<h2 id="技术实现：Flutter-桌面应用"><a href="#技术实现：Flutter-桌面应用" class="headerlink" title="技术实现：Flutter 桌面应用"></a>技术实现：Flutter 桌面应用</h2><h3 id="为什么选择-Flutter？"><a href="#为什么选择-Flutter？" class="headerlink" title="为什么选择 Flutter？"></a>为什么选择 Flutter？</h3><p>做这个应用时，我考虑过几个方案：</p>
+<ul>
+<li><strong>静态网站</strong>：简单，但阅读体验不够好</li>
+<li><strong>Electron</strong>：跨平台，但太重</li>
+<li><strong>原生 macOS 应用</strong>：体验好，但开发成本高</li>
+<li><strong>Flutter</strong>：跨平台、轻量、UI 表现力强</li>
+</ul>
+<p>最终选择 Flutter，主要因为：</p>
+<ol>
+<li><strong>一套代码，多端运行</strong>：macOS、Windows、Linux 都能跑</li>
+<li><strong>UI 表现力强</strong>：可以实现复杂的阅读布局和交互</li>
+<li><strong>开发效率高</strong>：热重载、Widget 复用，迭代快</li>
+<li><strong>性能好</strong>：编译成原生代码，启动快、内存占用小</li>
+</ol>
+<h3 id="技术架构"><a href="#技术架构" class="headerlink" title="技术架构"></a>技术架构</h3><p>应用采用单文件多 part 的结构：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.dart</span></span><br><span class="line"><span class="keyword">part</span> <span class="string">&#x27;src/models.dart&#x27;</span>;        <span class="comment">// 数据模型</span></span><br><span class="line"><span class="keyword">part</span> <span class="string">&#x27;src/home.dart&#x27;</span>;          <span class="comment">// 主状态管理</span></span><br><span class="line"><span class="keyword">part</span> <span class="string">&#x27;src/sidebar.dart&#x27;</span>;       <span class="comment">// 左侧目录</span></span><br><span class="line"><span class="keyword">part</span> <span class="string">&#x27;src/dashboard.dart&#x27;</span>;     <span class="comment">// 首页总览</span></span><br><span class="line"><span class="keyword">part</span> <span class="string">&#x27;src/reader.dart&#x27;</span>;        <span class="comment">// 文章阅读页</span></span><br><span class="line"><span class="keyword">part</span> <span class="string">&#x27;src/markdown_view.dart&#x27;</span>; <span class="comment">// Markdown 渲染</span></span><br></pre></td></tr></table></figure>
+<p>这种结构的好处是：</p>
+<ul>
+<li>逻辑清晰，每个 part 负责一个功能模块</li>
+<li>共享状态方便，不需要复杂的依赖注入</li>
+<li>代码量不大时，维护成本低</li>
+</ul>
+<h3 id="核心功能"><a href="#核心功能" class="headerlink" title="核心功能"></a>核心功能</h3><p><strong>阅读体验</strong>：</p>
+<ul>
+<li>阅读进度自动保存</li>
+<li>自动滚动（慢、中、快三档）</li>
+<li>字号和阅读宽度可调</li>
+<li>键盘快捷键（↑/↓ 滚动、Page Up/Down 翻页、←/→ 切换章节）</li>
+</ul>
+<p><strong>内容组织</strong>：</p>
+<ul>
+<li>左侧目录按业务节点展开</li>
+<li>节点页显示业务说明和阅读重点</li>
+<li>文章按阅读顺序排列</li>
+<li>技术证据固定在节点最后</li>
+</ul>
+<p><strong>搜索与定位</strong>：</p>
+<ul>
+<li>辅助关键词搜索</li>
+<li>节点悬停显示业务简介</li>
+<li>点击书名回到总纲</li>
+</ul>
+<h2 id="写作挑战：让业务文章像书一样"><a href="#写作挑战：让业务文章像书一样" class="headerlink" title="写作挑战：让业务文章像书一样"></a>写作挑战：让业务文章像书一样</h2><p>做这个应用最难的不是技术，而是写作。</p>
+<h3 id="1-从分析报告到业务叙述"><a href="#1-从分析报告到业务叙述" class="headerlink" title="1. 从分析报告到业务叙述"></a>1. 从分析报告到业务叙述</h3><p>技术分析习惯写：”这个接口返回 status 字段，0 表示待处理，1 表示已完成。”</p>
+<p>但业务之书要求写：”当一台机器被检测完成后，它的状态从’待检测’变成’已检测’，这意味着平台可以开始给用户打款了。”</p>
+<p>同样的信息，前者是技术文档，后者是业务叙述。业务叙述要回答：这个动作解决了什么问题？对人和交易意味着什么？</p>
+<h3 id="2-从碎片到体系"><a href="#2-从碎片到体系" class="headerlink" title="2. 从碎片到体系"></a>2. 从碎片到体系</h3><p>源码分析是碎片化的：今天分析估价接口，明天分析支付逻辑。但业务之书要求把这些碎片组织成体系：一笔回收交易从头到尾是怎么走完的？每个环节解决了什么问题？</p>
+<p>这需要反复梳理、不断调整。有时候写完一篇文章，发现它应该属于另一个节点；有时候发现两个节点之间有重叠，需要重新划分边界。</p>
+<h3 id="3-从具体到抽象"><a href="#3-从具体到抽象" class="headerlink" title="3. 从具体到抽象"></a>3. 从具体到抽象</h3><p>分析时很容易陷入具体公司的实现细节：”闪回收的估价接口调用的是 /api/quote/v2。”</p>
+<p>但业务之书要求抽象出行业通用的业务逻辑：”估价接口的核心是收集机器信息、计算参考价格、记录用户意向。”</p>
+<p>这种抽象不是忽略细节，而是把细节放在技术证据层，正文只讲业务运作。</p>
+<h2 id="效果与反思"><a href="#效果与反思" class="headerlink" title="效果与反思"></a>效果与反思</h2><h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p>这个应用目前包含：</p>
+<ul>
+<li>23 个业务节点</li>
+<li>23 篇业务模型文章</li>
+<li>23 篇技术证据文章</li>
+<li>总计约 10 万字</li>
+</ul>
+<p>它的价值在于：</p>
+<ul>
+<li><strong>新人入职</strong>：14 天学习作答计划，快速建立业务全局观</li>
+<li><strong>业务讨论</strong>：有了统一的业务语言和参考框架</li>
+<li><strong>知识沉淀</strong>：业务理解不再依赖个人记忆，而是沉淀成产品</li>
+</ul>
+<h3 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h3><p><strong>做得好的地方</strong>：</p>
+<ul>
+<li>业务与技术分层，让不同角色各取所需</li>
+<li>以业务节点为大纲，阅读路径清晰</li>
+<li>像书一样叙述，比文档更容易理解</li>
+</ul>
+<p><strong>可以改进的地方</strong>：</p>
+<ul>
+<li>内容更新成本高，每次业务变更都要同步更新文章</li>
+<li>缺少版本管理，无法追溯业务演进历史</li>
+<li>没有协作功能，多人维护时容易冲突</li>
+</ul>
+<h2 id="未来方向"><a href="#未来方向" class="headerlink" title="未来方向"></a>未来方向</h2><h3 id="1-内容动态化"><a href="#1-内容动态化" class="headerlink" title="1. 内容动态化"></a>1. 内容动态化</h3><p>当前内容是内置的 Markdown 文件，更新需要重新打包。未来可以考虑：</p>
+<ul>
+<li>从远程加载内容</li>
+<li>支持增量更新</li>
+<li>版本管理和回滚</li>
+</ul>
+<h3 id="2-协作与评论"><a href="#2-协作与评论" class="headerlink" title="2. 协作与评论"></a>2. 协作与评论</h3><p>业务理解不是一个人的事。未来可以加入：</p>
+<ul>
+<li>多人协作编辑</li>
+<li>文章评论和讨论</li>
+<li>业务变更通知</li>
+</ul>
+<h3 id="3-智能辅助"><a href="#3-智能辅助" class="headerlink" title="3. 智能辅助"></a>3. 智能辅助</h3><p>AI 可以帮助：</p>
+<ul>
+<li>自动生成业务模型初稿</li>
+<li>从源码自动提取技术证据</li>
+<li>智能问答，解答业务疑问</li>
+</ul>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>“业务之书”的尝试，本质上是在回答一个问题：<strong>当行业足够复杂，最好的知识沉淀方式是什么？</strong></p>
+<p>我的答案是：不是文档，不是 Wiki，而是一本书。</p>
+<p>书有章节、有结构、有叙述、有重点。它不是碎片的堆砌，而是体系的构建。当你读完一本书，你得到的不是零散的知识点，而是一个完整的认知框架。</p>
+<p>用 Flutter 做这个应用，不是为了炫技，而是为了让这个”书”的载体更好用。Flutter 的跨平台能力、UI 表现力、开发效率，让它成为实现这个想法的合适选择。</p>
+<p>如果你也在做业务分析，也在思考如何沉淀业务理解，不妨试试这个思路：<strong>把分析成果做成一本书</strong>。</p>
+<hr>
+<p><strong>项目信息</strong></p>
+<ul>
+<li>项目名称：二手行业业务之书</li>
+<li>技术栈：Flutter (macOS)</li>
+<li>内容规模：23 个业务节点，46 篇文章</li>
+<li>版本：1.1.0</li>
+</ul>
+<p><em>本文首发于 <a href="https://davidyuanx.github.io">David’s Blog</a>，转载请注明出处。</em></p>
+</div><iframe src="/donate/?AliPayQR=/img/alipay.jpeg&amp;WeChatQR=null&amp;GitHub=https://github.com/DavidYuanX&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=null" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div class="tags"><a href="/tags/Flutter/">Flutter</a><a href="/tags/%E4%BA%8C%E6%89%8B%E5%9B%9E%E6%94%B6/">二手回收</a><a href="/tags/%E4%B8%9A%E5%8A%A1%E5%88%86%E6%9E%90/">业务分析</a><a href="/tags/%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86/">知识管理</a></div><div class="post-nav"><a class="pre" href="/2026/09/16/%E9%97%AA%E5%9B%9E%E6%94%B6%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B62.0%E5%AE%9E%E6%88%98%E6%8F%AD%E7%A7%98/">让 AI 接管自动化测试：闪回收测试框架 2.0 实战揭秘</a><a class="next" href="/2026/08/28/%E4%BA%8C%E6%89%8B%E5%9B%9E%E6%94%B6%E8%A1%8C%E4%B8%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81AI%20Agent/">二手回收行业为什么需要AI Agent——从一条订单链路说起</a></div><div id="vcomment"></div><link rel="stylesheet" type="text/css" href="//unpkg.com/@waline/client@v2/dist/waline.css"><script src="//unpkg.com/@waline/client@v2/dist/waline.js"></script><script>const waline = Waline.init({
+  el: '#vcomment',
+  path: decodeURI(location.pathname) || '/',
+  lang: 'zh-cn',
+  serverURL: 'https://vercel-xi-gilt.vercel.app',
+  pageSize:'10'
+});</script></div></div></div><aside class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="search-form"><input class="popup-trigger" placeholder="Search" readonly="readonly"/></div></div><div class="toc-article" id="toc"><div class="toc-title">Categories<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80%EF%BC%9A%E4%BB%8E%E8%B5%84%E6%96%99%E5%A0%86%E5%88%B0%E4%B8%9A%E5%8A%A1%E4%B9%8B%E4%B9%A6"><span class="toc-number">1.</span> <span class="toc-text">引言：从资料堆到业务之书</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E7%90%86%E5%BF%B5%EF%BC%9A%E5%83%8F%E4%B9%A6%E4%B8%80%E6%A0%B7%E9%98%85%E8%AF%BB%E4%B8%9A%E5%8A%A1"><span class="toc-number">2.</span> <span class="toc-text">核心理念：像书一样阅读业务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%B8%8D%E6%98%AF%E8%B5%84%E6%96%99%E6%A3%80%E7%B4%A2%EF%BC%8C%E6%98%AF%E9%98%85%E8%AF%BB%E8%B7%AF%E5%BE%84"><span class="toc-number">2.1.</span> <span class="toc-text">1. 不是资料检索，是阅读路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%8A%82%E7%82%B9%E5%90%8D-%E4%B8%9A%E5%8A%A1%E5%A4%A7%E7%BA%B2"><span class="toc-number">2.2.</span> <span class="toc-text">2. 节点名 &#x3D; 业务大纲</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%B8%9A%E5%8A%A1%E4%B8%8E%E6%8A%80%E6%9C%AF%E5%88%86%E5%B1%82"><span class="toc-number">2.3.</span> <span class="toc-text">3. 业务与技术分层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%8E%BB%E5%93%81%E7%89%8C%E5%8C%96%EF%BC%8C%E6%B2%89%E6%B7%80%E8%A1%8C%E4%B8%9A%E7%90%86%E8%A7%A3"><span class="toc-number">2.4.</span> <span class="toc-text">4. 去品牌化，沉淀行业理解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AE%B9%E7%BB%93%E6%9E%84%EF%BC%9A23-%E4%B8%AA%E8%8A%82%E7%82%B9%EF%BC%8C%E6%9E%84%E5%BB%BA%E5%AE%8C%E6%95%B4%E4%B8%9A%E5%8A%A1%E5%9C%B0%E5%9B%BE"><span class="toc-number">3.</span> <span class="toc-text">内容结构：23 个节点，构建完整业务地图</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%9B%BD%E5%86%85%E5%9B%9E%E6%94%B6%E4%B8%9A%E5%8A%A1"><span class="toc-number">3.1.</span> <span class="toc-text">上篇：国内回收业务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E7%AF%87%EF%BC%9A%E5%9B%BD%E5%86%85%E9%94%80%E5%94%AE%E4%B8%9A%E5%8A%A1"><span class="toc-number">3.2.</span> <span class="toc-text">下篇：国内销售业务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%99%84%E7%AF%87%EF%BC%9A%E6%94%AF%E6%92%91%E8%83%BD%E5%8A%9B"><span class="toc-number">3.3.</span> <span class="toc-text">附篇：支撑能力</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E5%AE%9E%E7%8E%B0%EF%BC%9AFlutter-%E6%A1%8C%E9%9D%A2%E5%BA%94%E7%94%A8"><span class="toc-number">4.</span> <span class="toc-text">技术实现：Flutter 桌面应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9-Flutter%EF%BC%9F"><span class="toc-number">4.1.</span> <span class="toc-text">为什么选择 Flutter？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84"><span class="toc-number">4.2.</span> <span class="toc-text">技术架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD"><span class="toc-number">4.3.</span> <span class="toc-text">核心功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E4%BD%9C%E6%8C%91%E6%88%98%EF%BC%9A%E8%AE%A9%E4%B8%9A%E5%8A%A1%E6%96%87%E7%AB%A0%E5%83%8F%E4%B9%A6%E4%B8%80%E6%A0%B7"><span class="toc-number">5.</span> <span class="toc-text">写作挑战：让业务文章像书一样</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%BB%8E%E5%88%86%E6%9E%90%E6%8A%A5%E5%91%8A%E5%88%B0%E4%B8%9A%E5%8A%A1%E5%8F%99%E8%BF%B0"><span class="toc-number">5.1.</span> <span class="toc-text">1. 从分析报告到业务叙述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%BB%8E%E7%A2%8E%E7%89%87%E5%88%B0%E4%BD%93%E7%B3%BB"><span class="toc-number">5.2.</span> <span class="toc-text">2. 从碎片到体系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%BB%8E%E5%85%B7%E4%BD%93%E5%88%B0%E6%8A%BD%E8%B1%A1"><span class="toc-number">5.3.</span> <span class="toc-text">3. 从具体到抽象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%88%E6%9E%9C%E4%B8%8E%E5%8F%8D%E6%80%9D"><span class="toc-number">6.</span> <span class="toc-text">效果与反思</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%88%E6%9E%9C"><span class="toc-number">6.1.</span> <span class="toc-text">效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E6%80%9D"><span class="toc-number">6.2.</span> <span class="toc-text">反思</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AA%E6%9D%A5%E6%96%B9%E5%90%91"><span class="toc-number">7.</span> <span class="toc-text">未来方向</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%86%85%E5%AE%B9%E5%8A%A8%E6%80%81%E5%8C%96"><span class="toc-number">7.1.</span> <span class="toc-text">1. 内容动态化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%8D%8F%E4%BD%9C%E4%B8%8E%E8%AF%84%E8%AE%BA"><span class="toc-number">7.2.</span> <span class="toc-text">2. 协作与评论</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%99%BA%E8%83%BD%E8%BE%85%E5%8A%A9"><span class="toc-number">7.3.</span> <span class="toc-text">3. 智能辅助</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="toc-number">8.</span> <span class="toc-text">写在最后</span></a></li></ol></div></div></div></aside><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2026 <a href="/." rel="nofollow">David's blog.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv"><i class="fa fa-eye" aria-hidden="true"></i> <span id="busuanzi_value_site_pv"></span> times</span></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="/js/search.js?v=0.0.0"></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+   search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script type="text/javascript" src="/js/underscore-min.js"></script><script type="text/javascript" src="/js/inView.js"></script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>

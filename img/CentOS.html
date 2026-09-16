@@ -1,0 +1,83 @@
+<hr>
+<p>layout: photo<br>title: CentOS 搭建 服务端<br>date: 2019-07-05 22:08:50</p>
+<h2 id="tags-CentOS-linux"><a href="#tags-CentOS-linux" class="headerlink" title="tags: [CentOS,linux]"></a>tags: [CentOS,linux]</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><pre><code class="js">diskutil list
+
+将U盘卸载
+diskutil unmountDisk /dev/disk2  <span class="comment">//disk2 需要为 u盘 盘符</span>
+
+用dd命令制作安装盘
+
+sudo dd <span class="keyword">if</span>=~<span class="regexp">/Downloads/</span>CentOS<span class="number">-6.5</span>-x86_64-LiveCD.iso <span class="keyword">of</span>=<span class="regexp">/dev/</span>disk2 bs=<span class="number">1</span>m <span class="comment">// 静待10分钟</span>
+
+</code></pre>
+<p>最小化安装的有线网络配置</p>
+<p>/etc/sysconfig/network-scripts/ifcfg-enp3s0   ONBOOT=yes</p>
+<p>写一个简单的例子<br>让我们写一个Hello World程序。 在src目录下修改main.ts文件：</p>
+<pre><code class="js"><span class="keyword">import</span> { sayHello } <span class="keyword">from</span> <span class="string">"./greet"</span>;
+<span class="built_in">console</span>.log(sayHello(<span class="string">"TypeScript"</span>));
+</code></pre>
+<p>修改src/greet.ts文件如下：</p>
+<pre><code class="js"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">sayHello</span>(<span class="params">name: string</span>) </span>{
+    <span class="keyword">return</span> <span class="string">`Hello from <span class="subst">${name}</span>`</span>;
+}
+</code></pre>
+<p>修改gulpfile.js文件如下：</p>
+<pre><code class="js"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">"gulp"</span>);
+<span class="keyword">var</span> ts = <span class="built_in">require</span>(<span class="string">"gulp-typescript"</span>);
+<span class="keyword">var</span> tsProject = ts.createProject(<span class="string">"tsconfig.json"</span>);
+
+最小化安装的无线网络配置
+
+<span class="number">1.</span>首先下载iw工具。
+
+  yum -y install iw
+
+<span class="number">2.</span>获取无线网卡的名称
+
+  执行iw dev，假设获得名称为 wlp3s0（示例）
+
+<span class="number">3.</span>激活无线网络接口
+
+  执行ip link <span class="keyword">set</span> wlp3s0 up
+
+4.扫描当前环境中的无线网络
+
+  执行iw wlp3s0 scan|grep SSID，假设你能够连接的网络名称是TP-LINK-1（示例）
+
+5.登录指定网络
+
+  执行wpa_supplicant -B -i wlp3s0 -c &lt;(wpa_passphrase "TP-LINK-1" "此网络的密码")
+
+6.主动请求动态地址
+
+  dhclient wlp3s0
+
+7.查看获取的网络地址
+
+  执行ip addr show wlp3s0
+
+
+
+暴露 22 端口
+
+CentOS yum 安装Nginx
+1.添加Nginx到YUM源
+sudo rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
+2.安装Nginx
+sudo yum install -y nginx
+3.启动Nginx
+sudo systemctl start nginx.service
+4.过防火墙
+sudo firewall-cmd --permanent --zone=public --add-service=http
+sudo firewall-cmd --permanent --zone=public --add-service=https
+sudo firewall-cmd --reload
+5.开机启动
+sudo systemctl enable nginx
+以下是Nginx的默认路径：
+
+(1) Nginx配置路径：/etc/nginx/
+(2) PID目录：/var/run/nginx.pid
+(3) 错误日志：/var/log/nginx/error.log
+(4) 访问日志：/var/log/nginx/access.log
+(5) 默认站点目录：/usr/share/nginx/html
+</code></pre>
