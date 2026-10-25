@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://davidyuanx.github.io/2020/06/20/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86%E6%A2%B3%E7%90%86%E4%B9%8B%E5%B8%B8%E8%A7%81%E6%89%8B%E5%86%99%E5%8A%9F%E8%83%BD/</loc>
-    <lastmod>2026-10-25</lastmod>
-  </url>
-  <url>
-    <loc>https://davidyuanx.github.io/2020/06/10/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86%E6%A2%B3%E7%90%86%E4%B9%8B%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</loc>
-    <lastmod>2026-10-25</lastmod>
-  </url>
-  <url>
     <loc>https://davidyuanx.github.io/2020/05/15/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86%E6%A2%B3%E7%90%86%E4%B9%8B%E6%B8%B2%E6%9F%93%E7%AF%87/</loc>
     <lastmod>2026-10-25</lastmod>
   </url>
@@ -17,15 +9,11 @@
     <lastmod>2026-10-25</lastmod>
   </url>
   <url>
+    <loc>https://davidyuanx.github.io//2026/03/14/%E5%9B%BD%E5%86%85%E7%89%88-Vercel-%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2026-10-25</lastmod>
+  </url>
+  <url>
     <loc>https://davidyuanx.github.io/2026/01/25/%E5%A6%82%E6%9E%9C%E8%AE%A9%E6%88%91%E4%BB%8E%E9%9B%B6%E5%81%9A%E4%B8%80%E5%AE%B6AI%E9%A9%B1%E5%8A%A8%E7%9A%84%E4%BA%8C%E6%89%8B%E6%B6%88%E8%B4%B9%E7%94%B5%E5%AD%90%E5%9B%9E%E6%94%B6%E5%85%AC%E5%8F%B8/</loc>
-    <lastmod>2026-10-25</lastmod>
-  </url>
-  <url>
-    <loc>https://davidyuanx.github.io/2026/03/14/%E6%88%91%E7%94%A8%20Flutter+SpringBoot%20%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2%E5%B7%A5%E5%85%B7/</loc>
-    <lastmod>2026-10-25</lastmod>
-  </url>
-  <url>
-    <loc>https://davidyuanx.github.io/2026/03/14/%E6%88%91%E7%94%A8-Flutter-SpringBoot-%E5%BC%80%E5%8F%91%E4%BA%86%E4%B8%AA%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2%E5%B7%A5%E5%85%B7%EF%BC%88%E5%9B%BD%E5%86%85%E7%89%88-Vercel%EF%BC%89/</loc>
     <lastmod>2026-10-25</lastmod>
   </url>
   <url>
@@ -97,6 +85,30 @@
     <lastmod>2026-10-25</lastmod>
   </url>
   <url>
+    <loc>https://davidyuanx.github.io/2020/06/20/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86%E6%A2%B3%E7%90%86%E4%B9%8B%E5%B8%B8%E8%A7%81%E6%89%8B%E5%86%99%E5%8A%9F%E8%83%BD/</loc>
+    <lastmod>2026-10-25</lastmod>
+  </url>
+  <url>
+    <loc>https://davidyuanx.github.io/2020/06/10/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86%E6%A2%B3%E7%90%86%E4%B9%8B%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</loc>
+    <lastmod>2026-10-25</lastmod>
+  </url>
+  <url>
+    <loc>https://davidyuanx.github.io/2019/04/22/Js%E9%97%AD%E5%8C%85/</loc>
+    <lastmod>2026-10-25</lastmod>
+  </url>
+  <url>
+    <loc>https://davidyuanx.github.io/2019/05/10/Js%E9%9D%9E%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E7%9A%84%E7%BB%A7%E6%89%BF/</loc>
+    <lastmod>2026-10-25</lastmod>
+  </url>
+  <url>
+    <loc>https://davidyuanx.github.io/2019/03/10/Js%E9%9D%A2%E8%AF%95%E9%A2%98/</loc>
+    <lastmod>2026-10-25</lastmod>
+  </url>
+  <url>
+    <loc>https://davidyuanx.github.io/2019/03/15/MVC-VS-MVVM/</loc>
+    <lastmod>2026-10-25</lastmod>
+  </url>
+  <url>
     <loc>https://davidyuanx.github.io/2019/08/29/Nginx%20%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/</loc>
     <lastmod>2026-10-25</lastmod>
   </url>
@@ -125,11 +137,11 @@
     <lastmod>2026-10-25</lastmod>
   </url>
   <url>
-    <loc>https://davidyuanx.github.io/2019/11/05/React-Webpack%E5%A4%9A%E9%A1%B5/</loc>
+    <loc>https://davidyuanx.github.io/2019/11/27/React-Native%E5%BC%80%E5%8F%91%E4%B9%8BReact%E5%9F%BA%E7%A1%80%20copy/</loc>
     <lastmod>2026-10-25</lastmod>
   </url>
   <url>
-    <loc>https://davidyuanx.github.io/2019/11/27/React-Native%E5%BC%80%E5%8F%91%E4%B9%8BReact%E5%9F%BA%E7%A1%80%20copy/</loc>
+    <loc>https://davidyuanx.github.io/2019/11/05/React-Webpack%E5%A4%9A%E9%A1%B5/</loc>
     <lastmod>2026-10-25</lastmod>
   </url>
   <url>
@@ -209,11 +221,11 @@
     <lastmod>2026-10-25</lastmod>
   </url>
   <url>
-    <loc>https://davidyuanx.github.io/2019/03/05/GulpDemo/</loc>
+    <loc>https://davidyuanx.github.io/2019/03/20/Gulp-vueJs/</loc>
     <lastmod>2026-10-25</lastmod>
   </url>
   <url>
-    <loc>https://davidyuanx.github.io/2019/03/20/Gulp-vueJs/</loc>
+    <loc>https://davidyuanx.github.io/2019/03/05/GulpDemo/</loc>
     <lastmod>2026-10-25</lastmod>
   </url>
   <url>
@@ -230,22 +242,6 @@
   </url>
   <url>
     <loc>https://davidyuanx.github.io/2019/05/05/Js%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E7%BB%A7%E6%89%BF/</loc>
-    <lastmod>2026-10-25</lastmod>
-  </url>
-  <url>
-    <loc>https://davidyuanx.github.io/2019/04/22/Js%E9%97%AD%E5%8C%85/</loc>
-    <lastmod>2026-10-25</lastmod>
-  </url>
-  <url>
-    <loc>https://davidyuanx.github.io/2019/03/10/Js%E9%9D%A2%E8%AF%95%E9%A2%98/</loc>
-    <lastmod>2026-10-25</lastmod>
-  </url>
-  <url>
-    <loc>https://davidyuanx.github.io/2019/03/15/MVC-VS-MVVM/</loc>
-    <lastmod>2026-10-25</lastmod>
-  </url>
-  <url>
-    <loc>https://davidyuanx.github.io/2019/05/10/Js%E9%9D%9E%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E7%9A%84%E7%BB%A7%E6%89%BF/</loc>
     <lastmod>2026-10-25</lastmod>
   </url>
 </urlset> 
