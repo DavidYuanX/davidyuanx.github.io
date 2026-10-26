@@ -42,7 +42,8 @@ jQuery(document).ready(function() {
 	if(count == 0){
 		$("#WeChat").after('<div id="ps">没有开启任何Donate选项!</div>');
 	}
-	$("#donateBox li,#donateBox li a").css("width", Math.ceil(74+(74*(4-count)/count))+"px");
+	$("#donateBox li,#donateBox li a").css("width", count === 1 ? "140px" : Math.ceil(74+(74*(4-count)/count))+"px");
+	$("#donateBox > li:visible").first().css("border-left", "none");
 	function showQR(QR) {
 		if(QR) {
 			MainBox.css('background-image', 'url(' + QR + ')');
