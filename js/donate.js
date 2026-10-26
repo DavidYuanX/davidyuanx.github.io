@@ -42,7 +42,9 @@ jQuery(document).ready(function() {
 	if(count == 0){
 		$("#WeChat").after('<div id="ps">没有开启任何Donate选项!</div>');
 	}
-	$("#donateBox li,#donateBox li a").css("width", count === 1 ? "140px" : Math.ceil(74+(74*(4-count)/count))+"px");
+	var itemW = count === 1 ? 140 : Math.ceil(74+(74*(4-count)/count));
+	$("#donateBox li,#donateBox li a").css("width", itemW + "px");
+	$("#donateBox").css({ "width": (itemW*count + 2) + "px", "left": "calc(50% - " + (itemW*count/2) + "px)" });
 	$("#donateBox > li:visible").first().css("border-left", "none");
 	function showQR(QR) {
 		if(QR) {
